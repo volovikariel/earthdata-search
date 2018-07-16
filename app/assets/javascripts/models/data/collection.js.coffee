@@ -63,6 +63,7 @@ ns.Collection = do (ko
 
       @detailsLoaded = ko.observable(false)
       @gibs = ko.observable(null)
+      @associations = ko.observable(null)
 
       @gibsLayers = ko.computed( (->
         available = []
@@ -292,16 +293,17 @@ ns.Collection = do (ko
         @_datasourceListeners ?= []
         @_datasourceListeners.push(callback)
 
-    getValueForTag: (key) ->
+    getValueForTag: (key, customNameSpace) ->
+      nameSpace = if customNameSpace then customNameSpace else config.cmrTagNamespace
       tags = @tags()
       if tags && tags.constructor is Array
-        prefix = "#{config.cmrTagNamespace}.#{key}."
+        prefix = "#{nameSpace}.#{key}."
         len = prefix.length
         for tag in tags
           tag = tag.join('.') if tag.constructor is Array
           return tag.substr(len) if tag.substr(0, len) == prefix
       else
-        key = "#{config.cmrTagNamespace}.#{key}"
+        key = "#{nameSpace}.#{key}"
         tags?[key]?.data
 
     canFocus: ->
@@ -330,6 +332,7 @@ ns.Collection = do (ko
       @_setObservable('osdd_url', jsonObj)
       @_setObservable('tags', jsonObj)
       @gibs(@getValueForTag('extra.gibs'))
+      @associations(@getValueForTag('has_associations', 'org.market_basket')?.associated_short_names)
 
       @nrt = jsonObj.collection_data_type == "NEAR_REAL_TIME"
       @granuleCount(jsonObj.granule_count)

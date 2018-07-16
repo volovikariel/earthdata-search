@@ -101,7 +101,8 @@ class CollectionsController < ApplicationController
     end
 
     params['include_tags'] = ["#{Rails.configuration.cmr_tag_namespace}.*",
-                              'org.ceos.wgiss.cwic.granules.prod'].join(',')
+                              'org.ceos.wgiss.cwic.granules.prod',
+                              'org.market_basket.has_associations'].join(',')
 
     # params['include_facets'] = 'v2'
 
