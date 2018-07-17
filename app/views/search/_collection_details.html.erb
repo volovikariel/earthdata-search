@@ -109,12 +109,15 @@
                 <span data-bind="text: gibsLayers()"></span>
                 <!-- /ko -->
               </dd>
-              <dt>Related collections:</dt>
-              <dd>
+              <dt>View related collections:</dt>
                 <!--ko foreach: $root.ui.collectionsList.selected().associations-->
-                <span class="data-center-role-label" data-bind="text: $data"></span>
+                <dd><a data-bind="text: $data.title, attr: {href: $data.query}" target="_blank"></a></dd>
                 <!--/ko-->
-              </dd>
+
+                <dd>
+                  <span data-bind="ifnot: $root.ui.collectionsList.selected().associations">None</span>
+                </dd>
+
             </dl>
           </div>
           <div class="flex-column-sk">

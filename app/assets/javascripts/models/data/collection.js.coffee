@@ -332,7 +332,27 @@ ns.Collection = do (ko
       @_setObservable('osdd_url', jsonObj)
       @_setObservable('tags', jsonObj)
       @gibs(@getValueForTag('extra.gibs'))
-      @associations(@getValueForTag('has_associations', 'org.market_basket')?.associated_short_names)
+
+      associationsData = @getValueForTag('has_associations', 'org.market_basket')?.associated_concepts
+      if associationsData
+        for concept in associationsData
+
+          currUrl = window.location.href
+          re = new RegExp("[\\?&]p=([^&#]*)")
+          delimeter = re.exec(currUrl)[0].charAt(0)
+          newString = currUrl.replace(re, delimeter + "p=" + concept.id)
+          concept.query = newString
+
+          title = concept.title;
+          length = 80
+          trimmedString = if title.length > length then title.substring(0, length - 3) + "..." else title
+          concept.title = trimmedString
+
+          #alert(JSON.stringify(concept))
+
+        @associations(associationsData[..5])
+
+
 
       @nrt = jsonObj.collection_data_type == "NEAR_REAL_TIME"
       @granuleCount(jsonObj.granule_count)
