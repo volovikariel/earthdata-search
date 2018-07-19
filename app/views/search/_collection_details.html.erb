@@ -110,14 +110,18 @@
                 <!-- /ko -->
               </dd>
               <dt>View related collections:</dt>
-                <!--ko foreach: $root.ui.collectionsList.selected().associations-->
-                <dd><a data-bind="text: $data.title, click: function() {$root.ui.collectionsList.selected().showDetails($data.id)}" style="cursor: pointer;"></a></dd>
-                <!--/ko-->
-
-                <dd>
-                  <span data-bind="ifnot: $root.ui.collectionsList.selected().associations">None</span>
-                </dd>
-
+              <!--ko foreach: $root.ui.collectionsList.selected().associations-->
+              <dd>
+                <div class="progressbar-container progress">
+                  <div class="progress-bar" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                </div>
+                <a data-bind="attr: { title: 'Click to view collection: ' + $data.title }, text: $data.shortTitle,  click: function() {$root.ui.collectionsList.selected().showDetails($data.id)}"
+                   data-tooltip="true" data-placement="right" style="cursor: pointer;"></a>
+              </dd>
+              <!--/ko-->
+              <dd>
+                <span data-bind="ifnot: $root.ui.collectionsList.selected().associations">None</span>
+              </dd>
             </dl>
           </div>
           <div class="flex-column-sk">

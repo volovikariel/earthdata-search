@@ -301,3 +301,11 @@ a.endpoint-label {
   word-wrap: break-word;
   overflow-x: scroll;
 }
+
+.progressbar-container{
+  display: inline-block;
+  width: 100px;
+  margin: 0;
+  position: relative;
+  top: 5px;
+}

@@ -347,10 +347,11 @@ ns.Collection = do (ko
       associationsData = @getValueForTag('has_associations', 'org.market_basket')?.associated_concepts
       if associationsData
         for concept in associationsData
-          title = concept.title;
-          length = 80
+          title = concept.title
+          length = 35
           trimmedString = if title.length > length then title.substring(0, length - 3) + "..." else title
-          concept.title = trimmedString
+          concept.shortTitle = trimmedString
+
 
           #alert(JSON.stringify(concept))
 
