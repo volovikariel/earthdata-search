@@ -355,7 +355,7 @@ ns.Collection = do (ko
 
           #alert(JSON.stringify(concept))
 
-        @associations(associationsData[..5])
+        @associations(associationsData[..4])
 
 
 
