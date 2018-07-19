@@ -348,7 +348,7 @@ ns.Collection = do (ko
       if associationsData
         for concept in associationsData
           title = concept.title
-          length = 35
+          length = 38
           trimmedString = if title.length > length then title.substring(0, length - 3) + "..." else title
           concept.shortTitle = trimmedString
 

@@ -302,10 +302,15 @@ a.endpoint-label {
   overflow-x: scroll;
 }
 
-.progressbar-container{
+.progressbar-inline{
   display: inline-block;
-  width: 100px;
+  width: 70px;
   margin: 0;
   position: relative;
   top: 5px;
+}
+
+#details-wrapper {
+  white-space: nowrap;
+  max-width: 99%;
 }
