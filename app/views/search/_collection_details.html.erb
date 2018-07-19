@@ -111,7 +111,7 @@
               </dd>
               <dt>View related collections:</dt>
                 <!--ko foreach: $root.ui.collectionsList.selected().associations-->
-                <dd><a data-bind="text: $data.title, attr: {href: $data.query}" target="_blank"></a></dd>
+                <dd><a data-bind="text: $data.title, click: function() {$root.ui.collectionsList.selected().showDetails($data.id)}" style="cursor: pointer;"></a></dd>
                 <!--/ko-->
 
                 <dd>

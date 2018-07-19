@@ -30,7 +30,11 @@ ns.Collection = do (ko
     collections.push(collection)
     collection
 
+
+
+
   class Collection extends DetailsModel
+
     @awaitDatasources: (collections, callback) ->
       calls = collections.length
       aggregation = ->
@@ -52,6 +56,13 @@ ns.Collection = do (ko
 
     @visible: ko.computed
       read: -> collection for collection in collections() when collection.visible()
+
+    showDetails: (conceptId) ->
+      currUrl = window.location.href
+      re = new RegExp("[\\?&]p=([^&#]*)")
+      delimeter = re.exec(currUrl)[0].charAt(0)
+      newUrl = currUrl.replace(re, delimeter + "p=" + conceptId)
+      window.location.replace(newUrl)
 
     constructor: (jsonData, @query, inKey) ->
       throw "Collections should not be constructed directly" unless inKey == randomKey
@@ -336,13 +347,6 @@ ns.Collection = do (ko
       associationsData = @getValueForTag('has_associations', 'org.market_basket')?.associated_concepts
       if associationsData
         for concept in associationsData
-
-          currUrl = window.location.href
-          re = new RegExp("[\\?&]p=([^&#]*)")
-          delimeter = re.exec(currUrl)[0].charAt(0)
-          newString = currUrl.replace(re, delimeter + "p=" + concept.id)
-          concept.query = newString
-
           title = concept.title;
           length = 80
           trimmedString = if title.length > length then title.substring(0, length - 3) + "..." else title
@@ -373,5 +377,7 @@ ns.Collection = do (ko
 
     has_feature: (key) ->
       @getValueForTag("features.#{key}")
+
+
 
   exports = Collection
