@@ -112,11 +112,12 @@
               <dt>View related collections:</dt>
               <!--ko foreach: $root.ui.collectionsList.selected().associations-->
               <dd id="details-wrapper">
-                <div class="progressbar-inline progress">
-                  <div data-bind="attr: { style: 'width:' + $data.score + '%' }, text: $data.score + '%'" class="progress-bar" role="progressbar">25%</div>
-                </div>
+<!--                <div class="progressbar-inline progress">-->
+<!--                  <div data-bind="attr: { style: 'width:' + $data.score + '%' }, text: $data.score + '%'" class="progress-bar" role="progressbar">25%</div>-->
+<!--                </div>-->
                 <a data-bind="attr: { title: 'Click to view collection: ' + $data.title + '\nRelevance score: ' + $data.score + '%' }, text: $data.shortTitle,  click: function() {$root.ui.collectionsList.selected().showDetails($data.id)}"
                    data-tooltip="true" data-placement="right" style="cursor: pointer;"></a>
+                <div class="relevance-score-label" data-bind="text: $data.score + '%'"></div>
               </dd>
               <!--/ko-->
               <dd>
