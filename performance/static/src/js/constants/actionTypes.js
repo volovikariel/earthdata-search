@@ -1,0 +1,3 @@
+export const ADD_CLICK = 'ADD_CLICK'
+
+export const UPDATE_COLLECTIONS = 'UPDATE_COLLECTIONS'
