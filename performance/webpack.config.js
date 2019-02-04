@@ -38,6 +38,13 @@ module.exports = {
           { loader: 'sass-loader?sourceMap' },
           { loader: 'postcss-loader', options: { sourceMap: true } }
         ]
+<<<<<<< HEAD
+=======
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+>>>>>>> b1d8ae043bb7ba8ae7cd3ac7dbd037a7e00ae97a
       }
     ]
   },

@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+<<<<<<< HEAD
 import Map from '../../components/Map/Map'
+=======
+import EdscMap from '../../components/Map/Map'
+>>>>>>> b1d8ae043bb7ba8ae7cd3ac7dbd037a7e00ae97a
 
 import actions from '../../actions/index'
 
@@ -38,7 +42,11 @@ class Home extends Component {
 
     return (
       <div className="route-container route-container--home">
+<<<<<<< HEAD
         <Map />
+=======
+        <EdscMap />
+>>>>>>> b1d8ae043bb7ba8ae7cd3ac7dbd037a7e00ae97a
         <h2>
           The current value is:
           {` ${clicks.value}`}
