@@ -18,42 +18,15 @@ test_results
 /log/*.log
 /tmp
 
-/public/assets
-/public/assets-dev
-/public/colormaps
-
 # Deployment temp files
 /.librarian
 /.tmp
-/vagrant/.vagrant
 
-/config/database.yml
-.jhw-cache
 /config/application.yml
 
 /doc/ui/portfolio
 
 /vendor/bundle
 /vendor/cache
-
-# rubymine project files
-/.idea
-
-/bin/bundle
-/bin/rails
-/bin/rake
-config/initializers/cookies_serializer.rb
-config/initializers/filter_parameter_logging.rb
-config/secrets.yml
-config/services.yml
-
-dist
-node_modules
-npm-debug.log*
-/edsc/dist
-/mkmf.log
-.byebug_history
-remote-profile/
-edsc/echoforms
 
 config/master.key

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import Map from '../../components/Map/Map'
+import EdscMap from '../../components/Map/Map'
 
 import actions from '../../actions/index'
 
@@ -38,7 +38,7 @@ class Home extends Component {
 
     return (
       <div className="route-container route-container--home">
-        <Map />
+        <EdscMap />
         <h2>
           The current value is:
           {` ${clicks.value}`}
