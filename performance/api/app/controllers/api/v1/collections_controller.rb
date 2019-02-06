@@ -8,7 +8,7 @@ module Api
       end
 
       def show
-        request = Faraday.get('https://cmr.sit.earthdata.nasa.gov/search/concepts/' + params[:id] + '.' + @extension)
+        request = Faraday.get('https://cmr.sit.earthdata.nasa.gov/search/concepts/' + params[:id] + '.' + @extension.to_s)
 
         formatted_response(request.body, @extension, request.status)
       end
@@ -16,7 +16,7 @@ module Api
       private
 
       def collection_params
-        params.permit(:format, :sort_key, :page_size, :page_num, :include_facets, :keyword, :temporal, :concept_id, :polygon, :bounding_box, :point, :line)
+        params.permit(:format, :sort_key, :page_size, :page_num, :has_granules, :include_granule_counts, :include_facets, :keyword, :temporal, :concept_id, :polygon, :bounding_box, :point, :line)
       end
     end
   end

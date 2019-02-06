@@ -1,6 +1,7 @@
-import { applyMiddleware, compose, createStore } from 'redux'
+import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { routerMiddleware } from 'connected-react-router'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import createRootReducer from '../reducers'
 
@@ -15,19 +16,15 @@ const store = createStore(
   initialState,
 
   // Build out the Redux middleware
-  compose(
+  composeWithDevTools(
     applyMiddleware(
 
       // Set up Redux's connection with React Router
       routerMiddleware(history),
     ),
 
-    // Add the Redux Thunk middleware, along with the websocket connection
+    // Add the Redux Thunk middleware
     applyMiddleware(thunk),
-
-    // Add the Redux Devtools extension
-    // eslint-disable-next-line
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   ),
 )
 

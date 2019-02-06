@@ -1,12 +1,17 @@
 import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 
-import clicksReducer from './clicks'
 import collectionsReducer from './collections'
+import facetsReducer from './facets'
+import granulesReducer from './granules'
+import queryReducer from './search'
 
-// eslint-disable-next-line
-export default (history) => combineReducers({
+export default history => combineReducers({
   router: connectRouter(history),
-  clicks: clicksReducer,
-  collections: collectionsReducer
+  query: queryReducer,
+  entities: combineReducers({
+    collections: collectionsReducer,
+    facets: facetsReducer,
+    granules: granulesReducer
+  })
 })

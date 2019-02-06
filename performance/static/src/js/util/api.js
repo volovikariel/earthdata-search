@@ -1,25 +1,82 @@
-const url = 'http://localhost:3001/api/v1/collections.json'
+import axios from 'axios'
 
-export default class Api {
-  static getCollections(query = false) {
-    return new Promise((resolve, reject) => {
-      const req = new XMLHttpRequest()
+class APIWrapper {
+  constructor({ url }) {
+    this.url = url
+    this.endpoints = {}
+    this.createEndpoints = this.constructor.createEndpoints.bind(this)
+  }
 
-      req.open('GET', `${url}${query ? `/?keyword=${query}` : ''}`)
+  buildEntity(entity) {
+    this.endpoints[entity.name] = this.createEndpoints(entity)
+  }
 
-      req.onload = () => {
-        if (req.status === 200) {
-          resolve(JSON.parse(req.response))
-        } else {
-          reject(Error('Network Error'))
-        }
-      }
+  buildEntities(entitiesArray) {
+    entitiesArray.forEach(this.buildEntity.bind(this))
+  }
 
-      req.onerror = () => {
-        reject(Error('Network Error'))
-      }
+  get(endpoint, options = {}) {
+    return axios.get(`${this.url}/${endpoint}`, options)
+  }
 
-      req.send()
+  static createEndpoints({ endpoints }) {
+    const endpointsObj = {}
+    endpoints.forEach((endpoint) => {
+      endpointsObj[endpoint.name] = endpoint.callback
     })
+
+    return endpointsObj
   }
 }
+
+const API = new APIWrapper({ url: 'http://localhost:3001/api/v1' })
+
+API.buildEntity({
+  name: 'collections',
+  endpoints: [
+    {
+      name: 'getAll',
+      callback: ({
+        keyword,
+        hasGranules,
+        hasGranulesOrCwic,
+        includeHasGranules,
+        includeGranuleCounts,
+        includeFacets,
+        pageSize,
+        pageNum
+      } = {}) => API.get('collections', {
+        params: {
+          keyword,
+          has_granules: hasGranules,
+          include_granule_counts: includeGranuleCounts,
+          include_has_granules: includeHasGranules,
+          has_granules_or_cwic: hasGranulesOrCwic,
+          include_facets: includeFacets,
+          page_size: pageSize,
+          page_num: pageNum
+        }
+      })
+    },
+    {
+      name: 'getOne',
+      callback: ({ collectionId } = {}) => API.get(`collections/${collectionId}`)
+    }
+  ]
+})
+
+API.buildEntity({
+  name: 'granules',
+  endpoints: [
+    {
+      name: 'getAll',
+      callback: ({ collectionId } = {}) => API.get(`collections/${collectionId}/granules`)
+    },
+    {
+      name: 'getOne',
+      callback: ({ granuleId } = {}) => API.get(`granules/${granuleId}`)
+    }
+  ]
+})
+
+export default API

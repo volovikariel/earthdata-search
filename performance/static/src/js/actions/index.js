@@ -1,9 +1,10 @@
-import { addClick } from './clicks'
 import { getCollections } from './collections'
+import { changeQuery, changeP } from './search'
 
 const actions = {
-  addClick,
-  getCollections
+  getCollections,
+  changeQuery,
+  changeP
 }
 
 export default actions

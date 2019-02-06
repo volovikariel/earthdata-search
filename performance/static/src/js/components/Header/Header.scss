@@ -1,12 +1,11 @@
 .header {
-  position: absolute;
-  top: 0;
-  left: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   padding: 1rem;
+  background: $color__white;
+  z-index: 1;
 }
 
 .header__menu {

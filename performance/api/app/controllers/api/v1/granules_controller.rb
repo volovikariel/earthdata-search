@@ -8,7 +8,7 @@ module Api
       end
 
       def show
-        request = Faraday.get('https://cmr.sit.earthdata.nasa.gov/search/concepts/' + params[:id] + '.' + @extension)
+        request = Faraday.get('https://cmr.sit.earthdata.nasa.gov/search/concepts/' + params[:id] + '.' + @extension.to_s)
 
         formatted_response(request.body, @extension, request.status)
       end

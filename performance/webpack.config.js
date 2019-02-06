@@ -18,7 +18,13 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: [
-          { loader: 'babel-loader' },
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-class-properties']
+            }
+          },
           { loader: 'eslint-loader' }
         ]
       },
@@ -36,15 +42,25 @@ module.exports = {
           { loader: 'style-loader' },
           { loader: 'css-loader?sourceMap' },
           { loader: 'sass-loader?sourceMap' },
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              // eslint-disable-next-line
+              resources: require(path.join(process.cwd(), "/static/src/css/utils.js")),
+            }
+          },
           { loader: 'postcss-loader', options: { sourceMap: true } }
         ]
-<<<<<<< HEAD
-=======
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
->>>>>>> b1d8ae043bb7ba8ae7cd3ac7dbd037a7e00ae97a
+      },
+      {
+        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+        use: {
+          loader: 'url-loader?limit=100000'
+        }
       }
     ]
   },

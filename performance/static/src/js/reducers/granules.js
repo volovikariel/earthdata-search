@@ -1,16 +1,15 @@
-import { UPDATE_COLLECTIONS } from '../constants/actionTypes'
+import { UPDATE_GRANULES } from '../constants/actionTypes'
 
 const initialState = {
-  keyword: false,
   byId: {},
   allIds: []
 }
 
 const resultToStateObj = result => result
 
-const collectionsReducer = (state = initialState, action) => {
+const granulesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_COLLECTIONS: {
+    case UPDATE_GRANULES: {
       const byId = {}
       const allIds = []
       action.payload.results.forEach((result, i) => {
@@ -20,7 +19,6 @@ const collectionsReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        keyword: action.payload.keyword,
         byId,
         allIds
       }
@@ -30,4 +28,4 @@ const collectionsReducer = (state = initialState, action) => {
   }
 }
 
-export default collectionsReducer
+export default granulesReducer

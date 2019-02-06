@@ -1,5 +1,5 @@
 .footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  display: flex;
+  background: blue;
+  z-index: 1;
 }
