@@ -1,9 +1,13 @@
+@import '~bootstrap/scss/_functions.scss';
+@import '~bootstrap/scss/_mixins.scss';
+@import '~bootstrap/scss/_variables.scss';
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 1rem;
+  padding: $spacer;
   background: $color__white;
   z-index: 1;
 }

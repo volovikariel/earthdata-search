@@ -26,7 +26,7 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <RouterToUrlQuery>
-            <div className="container">
+            <div className="main-wrapper">
               <Helmet>
                 <meta charSet="utf-8" />
                 <title>Earthdata Search</title>

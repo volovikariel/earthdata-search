@@ -45,7 +45,6 @@ class Header extends Component {
 
   updateQuery(obj) {
     const { onChangeUrlQueryParams } = this.props
-    console.warn('obj', obj)
     onChangeUrlQueryParams(obj)
   }
 

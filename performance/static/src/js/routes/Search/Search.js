@@ -70,7 +70,7 @@ class Search extends Component {
     const { match } = this.props
 
     return (
-      <div className="route-container route-container--search search">
+      <div className="route-wrapper route-wrapper--search search">
         <EdscMap />
         <Sidebar />
         <div className="search__panel">

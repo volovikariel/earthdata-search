@@ -1,5 +1,5 @@
 .root,
-.container {
+.main-wrapper {
   height: 100%;
   width: 100%;
   position: relative;
@@ -9,12 +9,12 @@
   display: block;
 }
 
-.container {
+.main-wrapper {
   display: flex;
   flex-direction: column;
 }
 
-.route-container {
+.route-wrapper {
   height: 100%;
   width: 100%;
   display: flex;

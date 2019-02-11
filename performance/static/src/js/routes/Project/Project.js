@@ -8,7 +8,7 @@ class Settings extends Component {
 
   render() {
     return (
-      <div className="route-container route-container--settings">Project</div>
+      <div className="route-wrapper route-wrapper--project">Project</div>
     )
   }
 }
