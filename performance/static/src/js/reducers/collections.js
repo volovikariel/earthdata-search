@@ -1,15 +1,35 @@
-import { UPDATE_COLLECTIONS } from '../constants/actionTypes'
+import {
+  UPDATE_COLLECTIONS,
+  LOADING_COLLECTIONS,
+  LOADED_COLLECTIONS
+} from '../constants/actionTypes'
 
 const initialState = {
   keyword: false,
   byId: {},
-  allIds: []
+  allIds: [],
+  isLoading: false,
+  isLoaded: false
 }
 
 const resultToStateObj = result => result
 
 const collectionsReducer = (state = initialState, action) => {
   switch (action.type) {
+    case LOADING_COLLECTIONS: {
+      return {
+        ...state,
+        isLoading: true,
+        isLoaded: false
+      }
+    }
+    case LOADED_COLLECTIONS: {
+      return {
+        ...state,
+        isLoading: false,
+        isLoaded: action.payload.loaded
+      }
+    }
     case UPDATE_COLLECTIONS: {
       const byId = {}
       const allIds = []

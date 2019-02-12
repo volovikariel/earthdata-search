@@ -12,6 +12,7 @@
 .main-wrapper {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .route-wrapper {

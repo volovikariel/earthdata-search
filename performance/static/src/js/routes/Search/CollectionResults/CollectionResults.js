@@ -66,7 +66,7 @@ class CollectionResults extends Component {
 
     return (
       <div className="inner-panel">
-        {resultsHeading}
+        { !collections.isLoading ? resultsHeading : 'Loading...' }
         <ul>
           {collectionResults}
         </ul>

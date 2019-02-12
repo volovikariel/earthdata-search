@@ -9,7 +9,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const developmentMode = process.env.NODE_ENV !== 'production'
 
-// console.warn('developmentMode', developmentMode)
+console.warn('developmentMode', developmentMode)
 
 const extractHtml = new HtmlWebPackPlugin({
   template: './static/src/index.html',
@@ -18,6 +18,7 @@ const extractHtml = new HtmlWebPackPlugin({
 
 const webpackConfig = {
   entry: {
+    fontAwesome: 'font-awesome/scss/font-awesome.scss',
     client: './static/src/index.js'
   },
   output: {
@@ -68,12 +69,13 @@ const webpackConfig = {
         test: /\.(css|scss)$/,
         use: [
           {
-            loader: developmentMode ? 'style-loader' : MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true
+              sourceMap: true,
+              importLoaders: 1
             }
           },
           {
@@ -102,6 +104,13 @@ const webpackConfig = {
         use: {
           loader: 'url-loader?limit=100000'
         }
+      },
+      {
+        test: /font-awesome\.config\.js/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'font-awesome-loader' }
+        ]
       }
     ]
   },
