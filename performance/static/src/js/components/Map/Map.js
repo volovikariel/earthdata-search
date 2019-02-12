@@ -3,6 +3,7 @@ import 'proj4'
 import 'proj4leaflet'
 import L from 'leaflet'
 import { Map, TileLayer } from 'react-leaflet'
+import ZoomHome from './ZoomHome'
 
 import 'leaflet/dist/leaflet.css'
 import './Map.scss'
@@ -64,6 +65,7 @@ class EdscMap extends Component {
           noWrap
           continuousWorld
         />
+        <ZoomHome />
       </Map>
     )
   }
