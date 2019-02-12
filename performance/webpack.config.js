@@ -9,8 +9,6 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 const developmentMode = process.env.NODE_ENV !== 'production'
 
-console.warn('developmentMode', developmentMode)
-
 const extractHtml = new HtmlWebPackPlugin({
   template: './static/src/index.html',
   filename: './index.html'

@@ -3,5 +3,11 @@ const precss = require('precss')
 const cssnano = require('cssnano')
 
 module.exports = {
-  plugins: [precss, autoprefixer, cssnano]
+  plugins: [
+    precss,
+    autoprefixer({
+      browsers: ['> 1%', 'last 2 versions']
+    }),
+    cssnano
+  ]
 }
