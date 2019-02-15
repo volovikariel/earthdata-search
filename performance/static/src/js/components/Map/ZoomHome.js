@@ -19,7 +19,6 @@ class ZoomExtended extends Control.Zoom {
   }
 
   onAdd(map) {
-    console.log('onAdd')
     const { options } = this
     const container = Control.Zoom.prototype.onAdd.call(this, map)
     const home = this._createButton(
