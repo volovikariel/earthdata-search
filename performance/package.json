@@ -101,5 +101,8 @@
     "terser-webpack-plugin": "^1.2.2",
     "three": "~0.86.0",
     "uglifyjs-webpack-plugin": "^2.1.1"
+  },
+  "engines": {
+    "yarn": "YARN NO LONGER USED - use npm instead."
   }
 }

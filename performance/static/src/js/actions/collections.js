@@ -60,7 +60,7 @@ export const getCollections = keyword => (dispatch) => {
     includeHasGranules: true,
     includeGranuleCounts: true,
     includeTags: 'edsc.*,org.ceos.wgiss.cwic.granules.prod',
-    sortKey: ['has_granules_or_cwic'],
+    sortKey: ['has_granules_or_cwic']
   }).then((response) => {
     const payload = {
       results: response.data.feed.entry,
