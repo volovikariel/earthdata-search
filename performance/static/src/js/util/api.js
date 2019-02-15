@@ -29,7 +29,8 @@ class APIWrapper {
   }
 }
 
-const API = new APIWrapper({ url: 'http://localhost:3001/api/v1' })
+const API = new APIWrapper({ url: 'http://localhost:3000' })
+// const API = new APIWrapper({ url: 'https://w1inyritr3.execute-api.us-east-1.amazonaws.com/dev' })
 
 API.buildEntity({
   name: 'collections',
@@ -43,6 +44,8 @@ API.buildEntity({
         includeHasGranules,
         includeGranuleCounts,
         includeFacets,
+        includeTags,
+        sortKey,
         pageSize,
         pageNum
       } = {}) => API.get('collections', {
@@ -53,6 +56,8 @@ API.buildEntity({
           include_has_granules: includeHasGranules,
           has_granules_or_cwic: hasGranulesOrCwic,
           include_facets: includeFacets,
+          sort_key: sortKey,
+          include_tags: includeTags,
           page_size: pageSize,
           page_num: pageNum
         }

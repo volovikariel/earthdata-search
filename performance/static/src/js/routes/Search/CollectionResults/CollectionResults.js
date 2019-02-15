@@ -41,7 +41,6 @@ class CollectionResults extends Component {
 
       return (
         <li key={collection.id}>
-          <p>{collection.dataset_id}</p>
           <Link to={{
             pathname: '/search/granules',
             search: queryString
@@ -56,6 +55,7 @@ class CollectionResults extends Component {
           >
             {collection.dataset_id}
           </Link>
+          <p>{collection.granule_count}</p>
           <p>{collection.id}</p>
           <p>{collection.summary}</p>
           <p>{collection.short_name}</p>

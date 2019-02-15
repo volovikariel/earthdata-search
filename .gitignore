@@ -55,3 +55,7 @@ npm-debug.log*
 .byebug_history
 remote-profile/
 edsc/echoforms
+jspm_packages
+
+# Serverless directories
+.serverless
