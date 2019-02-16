@@ -37,6 +37,7 @@
     "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.6.0",
     "css-loader": "^2.1.0",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -100,7 +101,8 @@
     "serverless": "^1.37.1",
     "terser-webpack-plugin": "^1.2.2",
     "three": "~0.86.0",
-    "uglifyjs-webpack-plugin": "^2.1.1"
+    "uglifyjs-webpack-plugin": "^2.1.1",
+    "underscore": "^1.9.1"
   },
   "engines": {
     "yarn": "YARN NO LONGER USED - use npm instead."

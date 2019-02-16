@@ -1,12 +1,18 @@
 import React from 'react'
 
-import FacetsSection from './FacetsSection/FacetsSection'
+import Facets from './Facets/Facets'
+import SidebarSection from './SidebarSection/SidebarSection'
+
+import Header from './Header/Header'
 
 import './Sidebar.scss'
 
 const Sidebar = () => (
   <section className="sidebar">
-    <FacetsSection />
+    <Header />
+    <SidebarSection sectionTitle="Browse Collections">
+      <Facets />
+    </SidebarSection>
   </section>
 )
 

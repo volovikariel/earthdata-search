@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { uniqueId } from 'underscore'
 
-import './FacetsSection.scss'
+import './Facets.scss'
 
 const mapStateToProps = state => ({
   facets: state.entities.facets
@@ -12,18 +13,22 @@ const FacetsList = (props) => {
   const { facets } = props
   const list = facets.map((child, i) => {
     if (i < 50) {
+      const uid = uniqueId('facet-item_')
       return (
-        <li key={child.title}>
-          {child.title}
+        <li className="facets__list-item" key={child.title}>
+          <label className="facets__item-label" htmlFor={uid}>
+            <input id={uid} className="facets__item-checkbox" type="checkbox" />
+            <span className="facets__item-title">{child.title}</span>
+            <span className="facets__item-total">{child.count}</span>
+          </label>
         </li>
       )
     }
-    console.warn('trimmed')
     return null
   })
 
   return (
-    <ul>
+    <ul className="facets__list">
       {list}
     </ul>
   )
@@ -47,15 +52,15 @@ class FacetsGroup extends Component {
     const { isOpen } = this.state
 
     return (
-      <li className="facets-section__facet" key={facet.title}>
-        <h3 className="facets-section__facet-heading">
+      <li className="facets__facet" key={facet.title}>
+        <h3 className="facets__facet-heading">
           <button
-            className="btn btn-block facets-section__facet-button"
+            className="btn btn-block facets__facet-button"
             type="button"
             onClick={this.onToggle}
           >
-            <span className="facets-section__facet-title">{facet.title}</span>
-            <div className="facets-section__facet-action">
+            <span className="facets__facet-title">{facet.title}</span>
+            <div className="facets__facet-action">
               {
                 !isOpen
                   ? (
@@ -71,8 +76,8 @@ class FacetsGroup extends Component {
             </div>
           </button>
         </h3>
-        <div className={`facets-section__facet-group
-          ${isOpen ? ' facets-section__facet-group--is-open' : ''}`}
+        <div className={`facets__facet-group
+          ${isOpen ? ' facets__facet-group--is-open' : ''}`}
         >
           <FacetsList facets={facet.children} />
         </div>
@@ -81,7 +86,7 @@ class FacetsGroup extends Component {
   }
 }
 
-const FacetsSection = (props) => {
+const Facets = (props) => {
   const { facets } = props
 
   const facetsGroup = facets.allIds.map((id) => {
@@ -108,16 +113,14 @@ const FacetsSection = (props) => {
   }
 
   return (
-    <section className="facets-section">
-      <ul className="facets-section__facets">
-        <FacetsGroup facet={featuresFacet} />
-        {facetsGroup}
-      </ul>
-    </section>
+    <ul className="facets">
+      <FacetsGroup facet={featuresFacet} />
+      {facetsGroup}
+    </ul>
   )
 }
 
-FacetsSection.propTypes = {
+Facets.propTypes = {
   facets: PropTypes.shape({}).isRequired
 }
 
@@ -131,4 +134,4 @@ FacetsGroup.propTypes = {
   facet: PropTypes.shape({}).isRequired
 }
 
-export default connect(mapStateToProps, null)(FacetsSection)
+export default connect(mapStateToProps, null)(Facets)

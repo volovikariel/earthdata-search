@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const TerserJsPlugin = require('terser-webpack-plugin')
@@ -101,7 +102,10 @@ const StaticWebpackConfig = {
       {
         test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
         use: {
-          loader: 'url-loader?limit=100000'
+          loader: 'file-loader',
+          options: {
+            name: 'assets/[path][name].[hash].[ext]'
+          }
         }
       },
       {
@@ -121,7 +125,10 @@ const StaticWebpackConfig = {
       filename: developmentMode ? '[name].min.css' : '[name].[contenthash].min.css',
       chunkFilename: developmentMode ? '[id].min.css' : '[id].[contenthash].min.css',
       publicPath: '/'
-    })
+    }),
+    new CopyWebpackPlugin([
+      { from: './static/src/assets/public', to: './' }
+    ])
     // new BundleAnalyzerPlugin()
   ]
 }

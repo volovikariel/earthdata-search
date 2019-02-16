@@ -1,24 +1,26 @@
-.root,
-.main-wrapper {
-  height: 100%;
+.th-wrapper {
   width: 100%;
-  position: relative;
+  z-index: 1000;
+  height: 34px;
 }
 
 .root {
-  display: block;
-}
-
-.main-wrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
+  height: 100%;
   overflow: hidden;
+
+  .th-wrapper + & {
+    padding-top: 32px;
+  }
 }
 
 .route-wrapper {
-  height: 100%;
-  width: 100%;
   display: flex;
+  flex-basis: auto;
   flex-direction: row;
+  height: 100%;
+  overflow: hidden;
   align-items: flex-end;
 }

@@ -8,7 +8,6 @@ import { RouterToUrlQuery } from 'react-url-query'
 import store from './store/configureStore'
 import history from './util/history'
 
-import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 
 import Search from './routes/Search/Search'
@@ -26,12 +25,11 @@ class App extends Component {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <RouterToUrlQuery>
-            <div className="main-wrapper">
+            <React.Fragment>
               <Helmet>
                 <meta charSet="utf-8" />
                 <title>Earthdata Search</title>
               </Helmet>
-              <Header />
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/search" />
@@ -44,7 +42,7 @@ class App extends Component {
                 </Route>
               </Switch>
               <Footer />
-            </div>
+            </React.Fragment>
           </RouterToUrlQuery>
         </ConnectedRouter>
       </Provider>
