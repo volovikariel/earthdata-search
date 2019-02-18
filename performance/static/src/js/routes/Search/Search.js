@@ -13,6 +13,7 @@ import actions from '../../actions/index'
 import GranuleResults from './GranuleResults/GranuleResults'
 import CollectionResults from './CollectionResults/CollectionResults'
 import EdscMap from '../../components/Map/Map'
+import MyDropzone from '../../components/MyDropzone/MyDropzone'
 import Sidebar from './Sidebar/Sidebar'
 
 import './Search.scss'
@@ -72,6 +73,7 @@ class Search extends Component {
     return (
       <div className="route-wrapper route-wrapper--search search">
         <EdscMap />
+        <MyDropzone />
         <Sidebar />
         <div className="search__panel">
           <Switch>
