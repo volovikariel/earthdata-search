@@ -1,7 +1,22 @@
-// Custom Colors
+/*
+* Custom Colors
+*/
 
+// Body
 $body-bg: #000;
-$body-color: #111;
+$body-color: #333;
+
+// Links
+$link-color: $color__brand--blue;
+$link-hover-color: $color__brand--blue;
+$link-decoration: none;
+$link-hover-decoration: none;
+
+// Badges
+$badge-padding-y: 0.3125rem;
+$badge-padding-x: 0.5rem;
+$badge-font-size: 0.6875rem;
+$badge-border-radius: 0.125rem;
 
 
 // Custom Breakpoints

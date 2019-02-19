@@ -33,6 +33,9 @@
     # Require spacing in object literals
     "object-curly-spacing": ["error", "always"],
 
+    # Allow class methods that dont use 'this'
+    "class-methods-use-this": "off",
+
     "no-console": "off"
   },
 

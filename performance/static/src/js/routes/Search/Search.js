@@ -15,6 +15,7 @@ import CollectionResults from './CollectionResults/CollectionResults'
 import EdscMap from '../../components/Map/Map'
 import MyDropzone from '../../components/MyDropzone/MyDropzone'
 import Sidebar from './Sidebar/Sidebar'
+import Toolbar from './Toolbar/Toolbar'
 
 import './Search.scss'
 
@@ -75,6 +76,7 @@ class Search extends Component {
         <EdscMap />
         <MyDropzone />
         <Sidebar />
+        <Toolbar />
         <div className="search__panel">
           <Switch>
             <Route exact path={match.path}>

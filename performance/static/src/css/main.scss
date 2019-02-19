@@ -1,16 +1,12 @@
-@import "~bootstrap/scss/_functions";
-@import "~bootstrap/scss/_variables";
-@import "~bootstrap/scss/_mixins";
-@import "~bootstrap/scss/_utilities";
-@import "~bootstrap/scss/_reboot";
-@import "~bootstrap/scss/_print";
-@import "~bootstrap/scss/_grid";
-@import "~bootstrap/scss/_images";
-@import "~bootstrap/scss/_media";
-@import "~bootstrap/scss/_type";
-@import "~bootstrap/scss/_forms";
-@import "~bootstrap/scss/_buttons";
-@import "./vendor/bootstrap/overrides";
+/*
+ * Vendor styles
+*/
+@import 'vendor/bootstrap/bootstrap';
+
+/*
+ * Application styles
+*/
+
 @import 'utils/utils';
 @import 'base';
 @import 'helpers';

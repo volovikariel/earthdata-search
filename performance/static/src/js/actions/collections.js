@@ -62,10 +62,10 @@ export const getCollections = keyword => (dispatch) => {
     includeTags: 'edsc.*,org.ceos.wgiss.cwic.granules.prod',
     sortKey: ['has_granules_or_cwic']
   }).then((response) => {
-    const payload = {
-      results: response.data.feed.entry,
-      facets: response.data.feed.facets.children
-    }
+    const payload = {}
+    payload.results = response.data.feed.entry
+    payload.hits = response.data.feed.hits
+    payload.facets = response.data.feed.facets.children || []
 
     if (keyword) {
       payload.keyword = keyword

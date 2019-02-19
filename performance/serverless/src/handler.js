@@ -74,11 +74,17 @@ export function collectionSearch(event, context, callback) {
     })
 
     resp.on('end', () => {
+      const responseJSON = JSON.parse(bodyContent)
+
+      if (resp.headers['cmr-hits']) {
+        responseJSON.feed.hits = resp.headers['cmr-hits']
+      }
+
       callback(null, {
         isBase64Encoded: false,
         statusCode: resp.statusCode,
         headers: { 'Access-Control-Allow-Origin': '*' },
-        body: bodyContent
+        body: JSON.stringify(responseJSON)
       })
     })
   }).on('error', (err) => {

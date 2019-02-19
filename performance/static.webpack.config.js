@@ -11,7 +11,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const developmentMode = process.env.NODE_ENV !== 'production'
 
 const extractHtml = new HtmlWebPackPlugin({
-  template: './static/src/index.html',
+  template: './static/src/public/index.html',
   filename: './index.html'
 })
 
@@ -94,7 +94,7 @@ const StaticWebpackConfig = {
             loader: 'sass-resources-loader',
             options: {
               // eslint-disable-next-line
-              resources: require(path.join(process.cwd(), "/static/src/css/utils/utils.js")),
+              resources: require(path.join(process.cwd(), "/static/src/css/utils.js")),
             }
           }
         ]
@@ -127,7 +127,7 @@ const StaticWebpackConfig = {
       publicPath: '/'
     }),
     new CopyWebpackPlugin([
-      { from: './static/src/assets/public', to: './' }
+      { from: './static/src/public', to: './' }
     ])
     // new BundleAnalyzerPlugin()
   ]

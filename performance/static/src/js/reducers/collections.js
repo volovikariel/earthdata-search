@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   keyword: false,
+  hits: null,
   byId: {},
   allIds: [],
   isLoading: false,
@@ -41,6 +42,7 @@ const collectionsReducer = (state = initialState, action) => {
       return {
         ...state,
         keyword: action.payload.keyword,
+        hits: action.payload.hits,
         byId,
         allIds
       }

@@ -157,7 +157,7 @@ class EdscMap extends Component {
         className="map"
         center={[lat, lng]}
         zoom={zoom}
-        maxZoom={8}
+        maxZoom={7}
         crs={crsProjections[projIndex]}
         maxBounds={[
           [-120, -220],
