@@ -178,9 +178,9 @@ ns.ServiceOptions = do (ko, edsc = @edsc, KnockoutModel = @edsc.models.KnockoutM
       return false unless @isLoaded()
       return true if @granuleAccessOptions().methods?.length == 0
       
-      result = false
+      result = true
       for m in @accessMethod()
-        result = true if (m.isValid() && !m.loadForm()) && m.method()?
+        result = false unless (m.isValid() && !m.loadForm()) && m.method()?
       if result
         $('.access-submit').prop('title', "");
       result
