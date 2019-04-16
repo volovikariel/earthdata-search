@@ -9,7 +9,6 @@ import './Datepicker.scss'
 class Datepicker extends PureComponent {
   constructor(props) {
     super(props)
-    const { value } = props
     this.format = 'YYYY-MM-DD HH:mm:ss'
     this.isValidDate = this.isValidDate.bind(this)
     this.onBlur = this.onBlur.bind(this)
@@ -23,14 +22,18 @@ class Datepicker extends PureComponent {
     }
 
     this.state = {
-      value: value || ''
+      value: ''
     }
+
+    // console.warn('this.state', this.state)
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
     // Clear out the value in the input if the component is updated with empty value. This occurs
     // when the props are updated outside of the component (i.e. when the "clear" button) is clicked
+
     if (nextProps.value !== prevState.value) {
+      // console.warn('getDerivedStateFromProps', nextProps.value)
       return { value: nextProps.value }
     }
     return null
@@ -45,8 +48,8 @@ class Datepicker extends PureComponent {
 
     buttonToday.innerHTML = 'Today'
     buttonClear.innerHTML = 'Clear'
-    buttonToday.classList.add('datetime__button')
-    buttonClear.classList.add('datetime__button')
+    buttonToday.classList.add('datetime__button', 'datetime__button--today')
+    buttonClear.classList.add('datetime__button', 'datetime__button--clear')
     buttonContainer.classList.add('datetime__buttons')
     buttonToday.addEventListener('click', this.onTodayClick)
     buttonClear.addEventListener('click', this.onClearClick)
@@ -55,21 +58,7 @@ class Datepicker extends PureComponent {
     container.appendChild(buttonContainer)
   }
 
-  onBlur(value) {
-    const {
-      onSubmit
-    } = this.props
-
-    // Set strict parsing so we can use isValid on the date
-    const valueFromForm = moment.utc(value, 'YYYY-MM-DD HH:mm:ss', true)
-
-    this.setState({
-      value: valueFromForm
-    })
-
-    onSubmit(valueFromForm)
-
-    // Set the picker back to the 'years' view
+  onBlur() {
     this.picker.setState({
       currentView: 'years'
     })
@@ -108,26 +97,42 @@ class Datepicker extends PureComponent {
   * Set up the onChange event for the datepicker
   */
   onChange(value) {
+    // console.warn('onChange')
+    // console.warn('onChange.caller', arguments.callee.caller.toString())
+
     const {
       onSubmit,
       type
     } = this.props
 
-    // value will only ever be a moment object when a user clicks an item from the picker. We need to manually trigger the submission to the parent component
-    if (typeof value !== 'string' && value instanceof moment) {
-      let valueToSet = null
+    let valueToSet = null
+    // const valueCopy = Object.assign({}, value)
 
-      // Set the date to UTC to avoid timezone issues
+    // console.warn('onChange value', value)
+    // console.warn('onChange e', e)
+    console.warn('I think the problem is happening in the if statement below')
+
+    // Check to see if this is a moment object, which it will be when a valid date is entered
+    // Otherwise create a moment object with the value to send. Do this so we can call the isValid
+    // method in the callback function passed into the props from the TemporalSelectionDropdown component
+    if (typeof value !== 'string' && value instanceof moment) {
       value.utc()
 
+      // These startOf and endOf functions seem to not be respecting the utc as I understand it.
+      // For my timezone, the endOf returns the day after the day I have selected in the picker.
+      // This happens both with these helpers, as well as manually calling .set() on the moment objects :(
       if (type === 'start') {
         valueToSet = value.startOf('day')
       } else if (type === 'end') {
         valueToSet = value.endOf('day')
       }
-
-      onSubmit(valueToSet)
+      // console.log('moment().utcOffset()', moment().utcOffset())
+      // console.log('valueToSet', valueToSet)
+    } else {
+      valueToSet = moment.utc(value, this.format, true)
     }
+
+    onSubmit(valueToSet)
   }
 
   /**
@@ -153,18 +158,26 @@ class Datepicker extends PureComponent {
       onNavigateBack,
       setRef,
       state
+      // props
     } = this
     let { value } = state
 
-    // If we are passing a value, make sure it is the correct format
-    if (value) value = moment(value, moment.HTML5_FMT.DATETIME_LOCAL_MS).format(format)
+    const isValidISO = moment.utc(value, 'YYYY-MM-DDTHH:m:s.SSSZ', true).isValid()
+
+    if (isValidISO) {
+      value = moment.utc(value).format(format)
+    }
+
+    // console.warn(`state in component at render ${props.type}`, value)
 
     return (
       <Datetime
         className="datetime"
         closeOnSelect
         dateFormat="YYYY-MM-DD HH:mm:ss"
-        inputProps={{ placeholder: 'YYYY-MM-DD HH:mm:ss' }}
+        inputProps={{
+          placeholder: 'YYYY-MM-DD HH:mm:ss'
+        }}
         isValidDate={isValidDate}
         onBlur={onBlur}
         onChange={onChange}

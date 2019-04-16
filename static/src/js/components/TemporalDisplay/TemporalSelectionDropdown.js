@@ -121,7 +121,7 @@ export default class TemporalSelectionDropdown extends PureComponent {
     this.setState({
       temporal: {
         ...temporal,
-        startDate: startDate.isValid() ? startDate.toISOString() : ''
+        startDate: startDate.isValid() ? moment.utc(startDate).toISOString() : startDate._i // eslint-disable-line
       }
     })
   }
@@ -138,7 +138,7 @@ export default class TemporalSelectionDropdown extends PureComponent {
     this.setState({
       temporal: {
         ...temporal,
-        endDate: endDate.isValid() ? endDate.toISOString() : ''
+        endDate: endDate.isValid() ? moment.utc(endDate).toISOString() : endDate._i // eslint-disable-line
       }
     })
   }
@@ -159,6 +159,14 @@ export default class TemporalSelectionDropdown extends PureComponent {
       if (end.isBefore(start)) {
         value.startAfterEnd = true
       }
+    }
+
+    if (temporal && temporal.startDate) {
+      value.invalidStartDate = !moment.utc(temporal.startDate, 'YYYY-MM-DDTHH:m:s.SSSZ', true).isValid()
+    }
+
+    if (temporal && temporal.endDate) {
+      value.invalidEndDate = !moment.utc(temporal.endDate, 'YYYY-MM-DDTHH:m:s.SSSZ', true).isValid()
     }
 
     return value
@@ -203,7 +211,7 @@ export default class TemporalSelectionDropdown extends PureComponent {
         </Dropdown.Toggle>
         <Dropdown.Menu className="temporal-selection-dropdown__menu">
           <div className="temporal-selection-dropdown__inputs">
-            <Form.Group controlId="endDate" className={classes.inputStart}>
+            <Form.Group controlId="startDate" className={classes.inputStart}>
               <Form.Label className="temporal-selection-dropdown__label">
                 Start
               </Form.Label>
@@ -230,6 +238,16 @@ export default class TemporalSelectionDropdown extends PureComponent {
             must be no later than
             {' '}
             <strong>End</strong>
+          </Alert>
+          <Alert
+            variant="danger"
+            show={
+              temporalState.invalidStartDate || temporalState.invalidStartDate
+            }
+          >
+            Invalid
+            {` ${temporalState.invalidStartDate ? 'start' : 'end'} ` }
+            date
           </Alert>
           <Form.Group controlId="formBasicChecbox">
             <Form.Check>
