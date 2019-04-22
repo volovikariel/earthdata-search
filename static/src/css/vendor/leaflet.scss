@@ -1,20 +1,149 @@
 .root {
+  .toolbar a.toggle-filter-stack {
+    background: #111;
+    color: #fff;
+    float: right;
+  }
+
+  .leaflet-bottom.leaflet-right {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .leaflet-container {
+    height: 100%;
+  }
+
+  .leaflet-control-container {
+    position: absolute;
+    right: 0;
+    bottom: 50%;
+
+    .fa {
+      font-size: 12px;
+      line-height: 1.65;
+      vertical-align: middle;
+    }
+  }
+
   .leaflet-control {
     display: flex;
+  }
+
+  .leaflet-bottom.leaflet-right {
+    position: absolute;
+    right: 43px;
   }
 
   .leaflet-draw-toolbar {
     margin-top: 0;
   }
 
-  .leaflet-draw-toolbar-top {
-    margin-right: 10px;
+  .leaflet-draw-section {
+    float: right;
+    margin: 0 10px 0 0;
+    padding: 0;
+
+    &:last-child {
+      margin: 0;
+    }
   }
 
-  .leaflet-control-layers-toggle, .leaflet-retina .leaflet-control-layers-toggle {
+  .leaflet-draw-actions-top {
+    margin-top: 0;
+  }
+
+  .leaflet-right .leaflet-draw-actions {
+    top: -30px !important;
+    right: 0;
+
+    li:first-child a {
+      border-radius: 0;
+
+    }
+  }
+
+  .leaflet-draw-actions a {
+    background-color: #919187;
+    border: 0;
+    color: #FFF;
+    font: 11px/19px "Helvetica Neue", Arial, Helvetica, sans-serif;
+    line-height: 30px;
+    text-decoration: none;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+  }
+
+  .leaflet-bar,
+  .leaflet-touch .leaflet-bar,
+  .leaflet-draw-toolbar-top {
+    display: flex;
+  }
+
+  .leaflet-bar a,
+  .leaflet-bar button,
+  .leaflet-bar a:hover,
+  .leaflet-bar button:hover,
+  .leaflet-touch .leaflet-bar a,
+  .leaflet-touch .leaflet-bar button,
+  .leaflet-touch .leaflet-bar a:hover,
+  .leaflet-touch .leaflet-bar button:hover {
     width: 30px;
     height: 30px;
     line-height: 30px;
+
+    &:first-child {
+      border-top-left-radius: 2px;
+      border-top-right-radius: 0;
+      border-bottom-left-radius: 2px;
+      border-bottom-right-radius: 0;
+
+    }
+
+    &:last-child {
+      border-top-left-radius: 0;
+      border-top-right-radius: 2px;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 2px;
+    }
+  }
+
+  .leaflet-control-scale {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 50px;
+    right: -41px;
+  }
+
+  .leaflet-control-layers-list {
+    position: relative;
+    z-index: 1;
+  }
+
+  .leaflet-control-layers-toggle,
+  .leaflet-touch .leaflet-control-layers-toggle {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 2px;
+  }
+
+  .leaflet-control-layers {
+    position: absolute;
+    right: -43px;
+    bottom: 0px;
+  }
+
+  .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+      display: none;
+  }
+
+  .leaflet-control-layers {
+    margin-right: 10px;
+    margin-bottom: 10px;
   }
 
   .leaflet-control-layers-expanded {
@@ -22,10 +151,9 @@
     width: 175px;
   }
 
-  .leaflet-control-scale {
-    position: absolute;
-    bottom: 50px;
-    right: 2px;
+  .leaflet-retina .leaflet-control-layers-toggle, .leaflet-control-layers-toggle {
+    border-radius: 4px;
+    background-size: 16px 16px;
   }
 
   .leaflet-bar a,
@@ -34,6 +162,7 @@
     border: 0;
   }
 
+  .leaflet-draw-toolbar .leaflet-draw-edit-remove,
   .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove {
     background-position: -240px 0px;
 
@@ -42,6 +171,7 @@
     }
   }
 
+  .leaflet-draw-toolbar .leaflet-draw-edit-edit,
   .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit {
     background-position: -209px 0px;
 
@@ -50,21 +180,30 @@
     }
   }
 
-  .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-remove.leaflet-disabled,
-  .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-edit-edit.leaflet-disabled {
+  .leaflet-draw-toolbar a.leaflet-disabled:after {
+    background-color: rgba(230, 230, 230, 0.68);
+    height: 30px;
+    width: 30px;
+    content: "";
+    display: block;
+  }
+
+  .leaflet-bar a.leaflet-disabled {
     cursor: not-allowed;
   }
 
-  .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon {
+  .leaflet-draw-toolbar .leaflet-draw-draw-polygon,
+  .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-polygon  {
     background-position: -29px 0px;
   }
 
+  .leaflet-draw-toolbar .leaflet-draw-draw-rectangle,
   .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-rectangle {
     background-position: -60px 0px;
   }
 
+  .leaflet-draw-toolbar .leaflet-draw-draw-marker,
   .leaflet-touch .leaflet-draw-toolbar .leaflet-draw-draw-marker {
     background-position: -120px 0px;
   }
 }
-
