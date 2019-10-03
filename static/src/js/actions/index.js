@@ -111,6 +111,7 @@ import { fetchSavedProjects, setSavedProjects } from './savedProjects'
 import { handleError, removeError } from './errors'
 import { updateBrowserVersion } from './browser'
 import { collectionRelevancyMetrics } from './relevancy'
+import { fetchContactInfo, updateNotificationLevel } from './contactInfo'
 
 const actions = {
   addAccessMethods,
@@ -146,6 +147,7 @@ const actions = {
   fetchRetrievalCollectionGranuleLinks,
   fetchRetrievalHistory,
   fetchSavedProjects,
+  fetchContactInfo,
   handleError,
   getCollections,
   getFocusedCollection,
@@ -193,6 +195,7 @@ const actions = {
   updateGranuleMetadata,
   updateGranuleQuery,
   updateGranuleResults,
+  updateNotificationLevel,
   updateProjectName,
   updateSavedProject,
   updateShapefile,
