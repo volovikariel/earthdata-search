@@ -134,8 +134,6 @@ describe('GranuleResultsBody component', () => {
 
     const resultsTable = enzymeWrapper.find(GranuleResultsTable)
 
-    // console.log('resultsTable', resultsTable.debug())
-
     expect(resultsTable.props()).toEqual(expect.objectContaining({
       collectionId,
       itemCount: 2,

@@ -7,7 +7,9 @@ import { getApplicationConfig } from './config'
  */
 export const tagName = (key, namespaceOverride) => {
   let namespace
-  if (namespaceOverride) {
+
+  // If the namespaceOverride was not provided ('' will result in no namespace)
+  if (namespaceOverride != null) {
     namespace = namespaceOverride
   } else {
     const { cmrTagNamespace } = getApplicationConfig()
@@ -15,7 +17,7 @@ export const tagName = (key, namespaceOverride) => {
     namespace = cmrTagNamespace
   }
 
-  return [namespace, key].join('.')
+  return [namespace, key].filter(Boolean).join('.')
 }
 
 /**

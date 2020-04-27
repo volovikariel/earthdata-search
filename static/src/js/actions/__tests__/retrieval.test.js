@@ -437,7 +437,7 @@ describe('fetchRetrieval', () => {
 
     const consoleMock = jest.spyOn(console, 'error').mockImplementationOnce(() => jest.fn())
 
-    await store.dispatch(fetchRetrieval()).then(() => {
+    await store.dispatch(fetchRetrieval('2057964173')).then(() => {
       expect(consoleMock).toHaveBeenCalledTimes(1)
     })
   })

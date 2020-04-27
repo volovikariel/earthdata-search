@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { get } from 'tiny-cookie'
 
 import { getEnvironmentConfig } from '../../../../../sharedUtils/config'
-import { cmrEnv } from '../../../../../sharedUtils/cmrEnv'
 
 export class AuthRequiredContainer extends Component {
   constructor(props) {
@@ -16,14 +15,13 @@ export class AuthRequiredContainer extends Component {
 
   componentWillMount() {
     const { apiHost } = getEnvironmentConfig()
-    const cmrEnvironment = cmrEnv()
 
     const token = get('authToken')
 
     const returnPath = window.location.href
 
     if (token === null || token === '') {
-      window.location.href = `${apiHost}/login?cmr_env=${cmrEnvironment}&state=${encodeURIComponent(returnPath)}`
+      window.location.href = `${apiHost}/login?state=${encodeURIComponent(returnPath)}`
     } else {
       this.setState({ isLoggedIn: true })
     }

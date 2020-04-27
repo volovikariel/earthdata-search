@@ -1,5 +1,7 @@
 import { eventEmitter } from '../events/events'
 import { createDataLinks } from './granules'
+import { getEarthdataConfig } from '../../../../sharedUtils/config'
+import { cmrEnv } from '../../../../sharedUtils/cmrEnv'
 
 /**
  * @typedef {Object} GranuleListInfo
@@ -24,9 +26,11 @@ export const formatGranulesList = (granules, granuleIds, focusedGranule) => {
 
     const isFocused = focusedGranule === granuleId
 
+    const { cmrHost } = getEarthdataConfig(cmrEnv())
+    const browseUrl = `${cmrHost}/browse-scaler/browse_images/datasets/${granuleId}`
     const {
       browse_flag: browseFlag,
-      browse_url: browseUrl,
+      // browse_url: browseUrl,
       day_night_flag: dayNightFlag,
       formatted_temporal: formattedTemporal,
       id,

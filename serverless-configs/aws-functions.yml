@@ -517,3 +517,13 @@
           authorizer:
             name: edlAdminAuthorizer
             resultTtlInSeconds: 0
+            
+  fetchBrowseImage:
+    handler: serverless/src/fetchBrowseImage/handler.default
+    timeout: ${env:LAMBDA_TIMEOUT}
+    events:
+      - http:
+          method: get
+          cors: true
+          path: browse_scaler/{conceptType}/{conceptId}
+          authorizer: edlAuthorizer

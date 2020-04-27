@@ -36,7 +36,6 @@ function setup(overrideProps) {
           is_nrt: false,
           organizations: ['test/org'],
           short_name: 'test_short_name',
-          thumbnail: 'http://some.test.com/thumbnail/url.jpg',
           time_end: '2019-01-15T00:00:00.000Z',
           time_start: '2019-01-14T00:00:00.000Z',
           version_id: 2
@@ -186,7 +185,6 @@ describe('CollectionResultsBody component', () => {
             is_nrt: false,
             organizations: ['test/org'],
             short_name: 'test_short_name',
-            thumbnail: 'http://some.test.com/thumbnail/url.jpg',
             time_end: '2019-01-15T00:00:00.000Z',
             time_start: '2019-01-14T00:00:00.000Z',
             version_id: 2
@@ -233,7 +231,6 @@ describe('CollectionResultsBody component', () => {
                 is_nrt: false,
                 organizations: ['test/org'],
                 short_name: 'test_short_name',
-                thumbnail: 'http://some.test.com/thumbnail/url.jpg',
                 time_end: '2019-01-15T00:00:00.000Z',
                 time_start: '2019-01-14T00:00:00.000Z',
                 version_id: 2
@@ -274,7 +271,6 @@ describe('CollectionResultsBody component', () => {
                 is_nrt: false,
                 organizations: ['test/org'],
                 short_name: 'test_short_name',
-                thumbnail: 'http://some.test.com/thumbnail/url.jpg',
                 time_end: '2019-01-15T00:00:00.000Z',
                 time_start: '2019-01-14T00:00:00.000Z',
                 version_id: 2

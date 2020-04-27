@@ -23,6 +23,7 @@ export const GranuleResultsListItem = memo(({
   columnIndex,
   data,
   rowIndex,
+  isScrolling,
   style
 }) => {
   const element = useRef()
@@ -93,6 +94,7 @@ export const GranuleResultsListItem = memo(({
         collectionId={collectionId}
         focusedGranule={focusedGranule}
         granule={granules[index]}
+        isScrolling={isScrolling}
         location={location}
         onExcludeGranule={onExcludeGranule}
         onFocusedGranuleChange={onFocusedGranuleChange}
@@ -107,6 +109,7 @@ GranuleResultsListItem.displayName = 'GranuleResultsListItem'
 GranuleResultsListItem.propTypes = {
   columnIndex: PropTypes.number.isRequired,
   data: PropTypes.shape({}).isRequired,
+  isScrolling: PropTypes.bool.isRequired,
   rowIndex: PropTypes.number.isRequired,
   style: PropTypes.shape({}).isRequired
 }

@@ -45,7 +45,6 @@ export const updateGranuleResults = payload => ({
   payload
 })
 
-
 export const resetGranuleResults = payload => ({
   type: RESET_GRANULE_RESULTS,
   payload

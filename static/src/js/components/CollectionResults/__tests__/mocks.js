@@ -15,10 +15,10 @@ export const collectionListItemProps = {
     isLast: false,
     isNrt: false,
     shortName: 'cId1',
-    thumbnail: 'http://some.test.com/thumbnail/url.jpg',
     temporalRange: '2010-10-10 to 2011-10-10',
     versionId: '2'
   },
+  isScrolling: false,
   onAddProjectCollection: jest.fn(),
   onRemoveCollectionFromProject: jest.fn(),
   onViewCollectionGranules: jest.fn(),
@@ -47,7 +47,6 @@ export const collectionResultsBodyData = {
   temporalEnd: '2019-01-15',
   temporalRange: '2019-01-14 to 2019-01-15',
   temporalStart: '2019-01-14',
-  thumbnail: 'http://some.test.com/thumbnail/url.jpg',
   versionId: 2
 }
 

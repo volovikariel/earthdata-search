@@ -1,4 +1,4 @@
-.granule-image {
+.floating-browse-image {
   position: absolute;
   top: 100px;
   right: 1.5rem;
@@ -16,7 +16,7 @@
     transition: transform 0.2s ease-in-out;
     border: 2px solid rgba(0,0,0,.2);
 
-    .granule-image--is-open & {
+    .floating-browse-image--is-open & {
       transform: scale(1);
     }
   }

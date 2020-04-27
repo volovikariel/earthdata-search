@@ -20,6 +20,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onAddProjectCollection:
     collectionId => dispatch(actions.addProjectCollection(collectionId)),
+  onFetchBrowseImage:
+    (conceptType, conceptId, height, width) => dispatch(
+      actions.fetchBrowseImage(conceptType, conceptId, height, width)
+    ),
   onRemoveCollectionFromProject:
     collectionId => dispatch(actions.removeCollectionFromProject(collectionId)),
   onViewCollectionGranules:

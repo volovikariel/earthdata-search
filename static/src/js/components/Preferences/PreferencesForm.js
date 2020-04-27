@@ -14,7 +14,7 @@ import PreferencesRadioField from './PreferencesRadioField'
 import './PreferencesForm.scss'
 
 /**
- * Renders the Contact Info form
+ * Renders the Preferences form
  */
 const PreferencesForm = (props) => {
   const { preferences, onUpdatePreferences } = props

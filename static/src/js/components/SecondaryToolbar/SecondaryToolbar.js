@@ -9,7 +9,6 @@ import { pathStartsWith } from '../../util/pathStartsWith'
 import Button from '../Button/Button'
 import PortalLinkContainer from '../../containers/PortalLinkContainer/PortalLinkContainer'
 import { getEnvironmentConfig } from '../../../../../sharedUtils/config'
-import { cmrEnv } from '../../../../../sharedUtils/cmrEnv'
 
 import './SecondaryToolbar.scss'
 import { portalPath } from '../../../../../sharedUtils/portalPath'
@@ -100,7 +99,6 @@ class SecondaryToolbar extends Component {
     const returnPath = window.location.href
 
     const { apiHost } = getEnvironmentConfig()
-    const cmrEnvironment = cmrEnv()
 
     // remove focused collection from back button params
     const params = parse(location.search, { parseArrays: false, ignoreQueryPrefix: true })
@@ -138,7 +136,7 @@ class SecondaryToolbar extends Component {
           <Button
             className="secondary-toolbar__project"
             bootstrapVariant="light"
-            href={`${apiHost}/login?cmr_env=${cmrEnvironment}&state=${encodeURIComponent(projectPath)}`}
+            href={`${apiHost}/login?state=${encodeURIComponent(projectPath)}`}
             label="View Project"
           >
             My Project
@@ -169,7 +167,7 @@ class SecondaryToolbar extends Component {
       <Button
         className="secondary-toolbar__login"
         bootstrapVariant="light"
-        href={`${apiHost}/login?cmr_env=${cmrEnvironment}&state=${encodeURIComponent(returnPath)}`}
+        href={`${apiHost}/login?state=${encodeURIComponent(returnPath)}`}
         icon="lock"
         label="Login"
       >

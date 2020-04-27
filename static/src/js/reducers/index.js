@@ -38,6 +38,7 @@ import adminIsAuthorizedReducer from './admin/isAuthorized'
 import adminRetrievalsReducer from './admin/retrievals'
 import preferencesReducer from './preferences'
 import autocompleteReducer from './autocomplete'
+import browseImageryReducer from './browseImagery'
 
 export default history => combineReducers({
   admin: combineReducers({
@@ -48,6 +49,7 @@ export default history => combineReducers({
   authToken: authTokenReducer,
   autocomplete: autocompleteReducer,
   browser: browserReducer,
+  browseImagery: browseImageryReducer,
   contactInfo: contactInfoReducer,
   dataQualitySummaries: dataQualitySummariesReducer,
   errors: errorsReducer,

@@ -19,6 +19,7 @@ import './CollectionResultsListItem.scss'
 export const CollectionResultsListItem = memo(({
   data,
   index,
+  isScrolling,
   style
 }) => {
   const element = useRef()
@@ -59,6 +60,7 @@ export const CollectionResultsListItem = memo(({
         onRemoveCollectionFromProject={onRemoveCollectionFromProject}
         onViewCollectionGranules={onViewCollectionGranules}
         onViewCollectionDetails={onViewCollectionDetails}
+        isScrolling={isScrolling}
         loadMoreItems={loadMoreItems}
       />
     </li>
@@ -69,6 +71,7 @@ CollectionResultsListItem.displayName = 'CollectionResultsListItem'
 
 CollectionResultsListItem.propTypes = {
   data: PropTypes.shape({}).isRequired,
+  isScrolling: PropTypes.bool.isRequired,
   index: PropTypes.number.isRequired,
   style: PropTypes.shape({}).isRequired
 }

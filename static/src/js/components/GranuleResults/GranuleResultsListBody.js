@@ -212,6 +212,7 @@ export const GranuleResultsListBody = ({
                 visibleStopIndex
               })
             }}
+            useIsScrolling
           >
             {GranuleResultsListItem}
           </Grid>

@@ -179,7 +179,7 @@ const autocomplete = async (event) => {
 
   try {
     if (type === 'spatial') {
-      const geocodeResult = await geocode(q, process.env.GEOCODE_SERVICE)
+      const geocodeResult = await geocode(q)
 
       return {
         isBase64Encoded: false,

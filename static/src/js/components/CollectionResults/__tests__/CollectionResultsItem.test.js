@@ -6,6 +6,9 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import CollectionResultsItem from '../CollectionResultsItem'
 import SplitBadge from '../../SplitBadge/SplitBadge'
 import { collectionListItemProps } from './mocks'
+import {
+  BrowseImageContainer
+} from '../../../containers/BrowseImageContainer/BrowseImageContainer'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -70,16 +73,9 @@ describe('CollectionResultsList component', () => {
     })
   })
 
-  test('renders thumbnail correctly', () => {
+  test('renders thumbnail', () => {
     const { enzymeWrapper } = setup()
-    expect(enzymeWrapper.find('.collection-results-item__thumb-image').props().src)
-      .toEqual('http://some.test.com/thumbnail/url.jpg')
-    expect(enzymeWrapper.find('.collection-results-item__thumb-image').props().alt)
-      .toEqual('Thumbnail for Test Collection')
-    expect(enzymeWrapper.find('.collection-results-item__thumb-image').props().height)
-      .toEqual(85)
-    expect(enzymeWrapper.find('.collection-results-item__thumb-image').props().width)
-      .toEqual(85)
+    expect(enzymeWrapper.find(BrowseImageContainer)).toBeDefined()
   })
 
   test('renders title correctly', () => {

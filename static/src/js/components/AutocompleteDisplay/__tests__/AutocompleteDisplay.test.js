@@ -37,9 +37,9 @@ describe('AutocompleteDisplay component', () => {
         onRemoveAutocompleteValue: jest.fn()
       }
 
-      const shallowEnzymeWrapper = shallow(<AutocompleteDisplay {...props} />).type()
+      const shallowEnzymeWrapper = shallow(<AutocompleteDisplay {...props} />)
 
-      expect(shallowEnzymeWrapper).toBe(null)
+      expect(shallowEnzymeWrapper.type()).toBe(null)
     })
   })
 

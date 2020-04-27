@@ -148,6 +148,7 @@ import {
   setPreferencesFromJwt,
   updatePreferences
 } from './preferences'
+import { fetchBrowseImage } from './browseImagery'
 
 const actions = {
   addAccessMethods,
@@ -187,6 +188,7 @@ const actions = {
   fetchAdminRetrievals,
   fetchAutocomplete,
   fetchContactInfo,
+  fetchBrowseImage,
   fetchDataQualitySummaries,
   fetchProviders,
   fetchRetrieval,

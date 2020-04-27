@@ -96,7 +96,7 @@ describe('CollectionRequest#nonIndexedKeys', () => {
       'sort_key',
       'spatial_keyword',
       'tag_key'
-      ])
+    ])
   })
 })
 
@@ -129,8 +129,7 @@ describe('CollectionRequest#transformResponse', () => {
           id: 'collectionId',
           tags: {},
           has_map_imagery: false,
-          is_cwic: false,
-          thumbnail: 'test-file-stub'
+          is_cwic: false
         }]
       }
     }
@@ -168,8 +167,7 @@ describe('CollectionRequest#transformResponse', () => {
           tags: {
             'org.ceos.wgiss.cwic.granules.prod': 'stuff here'
           },
-          is_cwic: true,
-          thumbnail: 'test-file-stub'
+          is_cwic: true
         }]
       }
     }
@@ -212,8 +210,7 @@ describe('CollectionRequest#transformResponse', () => {
             is_cwic: false,
             tags: {
               'edsc.extra.serverless.gibs': 'stuff here'
-            },
-            thumbnail: 'https://cmr.earthdata.nasa.gov/browse-scaler/browse_images/datasets/collectionId?h=85&w=85'
+            }
           }]
         }
       }
@@ -249,8 +246,7 @@ describe('CollectionRequest#transformResponse', () => {
             has_map_imagery: false,
             id: 'collectionId',
             is_cwic: false,
-            tags: {},
-            thumbnail: 'test-file-stub'
+            tags: {}
           }]
         }
       }

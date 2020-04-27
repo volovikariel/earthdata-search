@@ -48,8 +48,7 @@ export const getProjectCollectionsResponse = [
       },
       metadata: {
         id: 'collectionId1',
-        mockCollectionData: 'goes here',
-        thumbnail: 'test-file-stub'
+        mockCollectionData: 'goes here'
       },
       ummMetadata: {
         data: 'collectionId1'
@@ -105,8 +104,7 @@ export const getProjectCollectionsResponse = [
       },
       metadata: {
         id: 'collectionId2',
-        mockCollectionData: 'collection data 2',
-        thumbnail: 'test-file-stub'
+        mockCollectionData: 'collection data 2'
       },
       ummMetadata: {
         data: 'collectionId2'
@@ -166,8 +164,7 @@ export const getCollectionsResponseUnauth = [
       metadata: {
         id: 'collectionId1',
         short_name: 'id_1',
-        version_id: 'VersionID',
-        thumbnail: 'test-file-stub'
+        version_id: 'VersionID'
       },
       ummMetadata: {
         data: 'collectionId1'
@@ -227,8 +224,7 @@ export const getCollectionsResponseAuth = [
       metadata: {
         id: 'collectionId1',
         short_name: 'id_1',
-        version_id: 'VersionID',
-        thumbnail: 'test-file-stub'
+        version_id: 'VersionID'
       },
       ummMetadata: {
         data: 'collectionId1'

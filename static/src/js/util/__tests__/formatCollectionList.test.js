@@ -20,7 +20,6 @@ describe('formatCollectionList', () => {
           is_nrt: false,
           organizations: ['test/org'],
           short_name: 'test_short_name',
-          thumbnail: 'http://some.test.com/thumbnail/url.jpg',
           time_end: '2019-01-15T00:00:00.000Z',
           time_start: '2019-01-14T00:00:00.000Z',
           version_id: 2
@@ -50,7 +49,6 @@ describe('formatCollectionList', () => {
       temporalEnd: '2019-01-15',
       temporalRange: '2019-01-14 to 2019-01-15',
       temporalStart: '2019-01-14',
-      thumbnail: 'http://some.test.com/thumbnail/url.jpg',
       versionId: 2
     }
 
@@ -89,7 +87,6 @@ describe('formatCollectionList', () => {
       temporalEnd: '',
       temporalRange: '',
       temporalStart: '',
-      thumbnail: null,
       versionId: undefined
     }
 

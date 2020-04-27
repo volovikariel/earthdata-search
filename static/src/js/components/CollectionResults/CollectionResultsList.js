@@ -142,6 +142,7 @@ export const CollectionResultsList = ({
                         onItemsRendered(data)
                       }
                     }
+                    useIsScrolling
                   >
                     {CollectionResultsListItem}
                   </List>

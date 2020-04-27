@@ -26,8 +26,8 @@ import ZoomHome
   from '../../components/Map/ZoomHome'
 import ProjectionSwitcher
   from '../../components/Map/ProjectionSwitcher'
-import GranuleImageContainer
-  from '../GranuleImageContainer/GranuleImageContainer'
+import BrowseImageContainer
+  from '../BrowseImageContainer/BrowseImageContainer'
 
 import crsProjections from '../../util/map/crs'
 import projections from '../../util/map/projections'
@@ -214,12 +214,17 @@ export class MapContainer extends Component {
 
     const maxZoom = projection === projections.geographic ? 7 : 4
 
+    // Default this to false so that the floating browse image will
+    // not appear when a granule is focused
+    let focusedGranuleHasBrowse = false
+
     let nonExcludedGranules
     if (focusedCollection && collections.byId[focusedCollection]) {
       const { excludedGranuleIds = [], granules } = collections.byId[focusedCollection]
-      const { allIds, isCwic } = granules
+      const { allIds, byId: granulesById = {}, isCwic } = granules
       const allGranuleIds = allIds
       nonExcludedGranules = granules
+
       let granuleIds
       if (isCwic) {
         granuleIds = allGranuleIds.filter((id) => {
@@ -229,10 +234,16 @@ export class MapContainer extends Component {
       } else {
         granuleIds = difference(allGranuleIds, excludedGranuleIds)
       }
+
       nonExcludedGranules = { byId: {} }
       granuleIds.forEach((granuleId) => {
         nonExcludedGranules.byId[granuleId] = granules.byId[granuleId]
       })
+
+      // Set `focusedGranuleHasBrowse` to determine whether or not to show
+      // the FloatingBrowseImage component (semicolon is necessary to prevent linter errors)
+      const { [focusedGranule]: focusedGranuleMetadata = {} } = granulesById;
+      ({ browse_flag: focusedGranuleHasBrowse = false } = focusedGranuleMetadata)
     }
 
     if (this.mapRef) this.mapRef.leafletElement.options.crs = crsProjections[projection]
@@ -361,7 +372,17 @@ export class MapContainer extends Component {
           />
           )
         }
-        <GranuleImageContainer />
+        {
+          focusedGranuleHasBrowse && (
+            <BrowseImageContainer
+              conceptId={focusedGranule}
+              conceptType="granules"
+              height={512}
+              isFloating
+              width={512}
+            />
+          )
+        }
       </Map>
     )
   }

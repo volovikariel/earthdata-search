@@ -26,7 +26,6 @@ export const formatCollectionList = (collections, projectIds, browser) => {
       organizations = [],
       short_name: shortName,
       summary = '',
-      thumbnail = null,
       time_end: timeEnd = null,
       time_start: timeStart = null,
       version_id: versionId
@@ -107,7 +106,6 @@ export const formatCollectionList = (collections, projectIds, browser) => {
       temporalEnd,
       temporalRange,
       temporalStart,
-      thumbnail,
       versionId,
       isCollectionInProject,
       isLast

@@ -7,7 +7,6 @@ import configureStore from '../../store/configureStore'
 import { metricsTiming } from '../../middleware/metrics/actions'
 import { prepKeysForCmr } from '../url/url'
 import { getEnvironmentConfig, getClientId } from '../../../../../sharedUtils/config'
-import { cmrEnv } from '../../../../../sharedUtils/cmrEnv'
 
 const store = configureStore()
 
@@ -164,7 +163,7 @@ export default class Request {
    * @param {Object} params URL parameters
    * @return {Promise} A Promise object representing the request that was made
    */
-  get(url, params) {
+  get(url, params, options = {}) {
     this.startTimer()
     this.setFullUrl(url)
     this.generateRequestId()
@@ -177,7 +176,8 @@ export default class Request {
       transformResponse: axios.defaults.transformResponse.concat(
         (data, headers) => this.transformResponse(data, headers)
       ),
-      cancelToken: this.cancelToken.token
+      cancelToken: this.cancelToken.token,
+      ...options
     }
 
     // transformRequest which adds authentication headers is only
@@ -239,9 +239,11 @@ export default class Request {
    * Handle an unauthorized response
    */
   handleUnauthorized(data) {
-    const cmrEnvironment = cmrEnv()
-    if (data.statusCode === 401 || data.message === 'Unauthorized') {
+    const { message, statusCode } = data
+
+    if (statusCode === 401 || message === 'Unauthorized') {
       const { href, pathname } = window.location
+
       // Determine the path to redirect to for logging in
       const returnPath = href
 
@@ -250,7 +252,7 @@ export default class Request {
         return
       }
 
-      const redirectPath = `${getEnvironmentConfig().apiHost}/login?cmr_env=${cmrEnvironment}&state=${encodeURIComponent(returnPath)}`
+      const redirectPath = `${getEnvironmentConfig().apiHost}/login?state=${encodeURIComponent(returnPath)}`
 
       window.location.href = redirectPath
     }

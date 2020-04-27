@@ -1,11 +1,18 @@
+import { Provider } from 'react-redux'
 import React from 'react'
-import Enzyme, { mount } from 'enzyme'
+import Enzyme, { mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import { VariableSizeList as List } from 'react-window'
+import actions from '../../../actions/index'
 
 import CollectionResultsList from '../CollectionResultsList'
 import CollectionResultsItem from '../CollectionResultsItem'
+import * as getEarthdataConfig from '../../../../../../sharedUtils/config'
+
+import configureStore from '../../../store/configureStore'
+
+const store = configureStore()
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -50,7 +57,11 @@ function setup(mountType, propsOverride = {}) {
     ...propsOverride
   }
 
-  const enzymeWrapper = mountType(<CollectionResultsList {...props} />)
+  const enzymeWrapper = mountType(
+    <Provider store={store}>
+      <CollectionResultsList {...props} />
+    </Provider>
+  )
 
   return {
     enzymeWrapper,
@@ -60,9 +71,10 @@ function setup(mountType, propsOverride = {}) {
 
 describe('CollectionResultsList component', () => {
   test('renders itself correctly', () => {
-    const { enzymeWrapper } = setup(mount)
+    const { enzymeWrapper } = setup(shallow)
 
-    expect(enzymeWrapper.type()).toBe(CollectionResultsList)
+    const orderStatus = enzymeWrapper.find(CollectionResultsList)
+    expect(orderStatus).toBeDefined()
   })
 
   test('renders its list correctly', () => {
@@ -93,6 +105,8 @@ describe('CollectionResultsList component', () => {
     })
 
     test('shows when additional items are being loaded', () => {
+      jest.spyOn(getEarthdataConfig, 'getEarthdataConfig').mockImplementationOnce(() => ({ cmrHost: 'http://cmr.example.com' }))
+
       const isItemLoadedMock = jest.fn()
         .mockReturnValueOnce(true)
         .mockReturnValueOnce(true)
@@ -111,6 +125,12 @@ describe('CollectionResultsList component', () => {
     })
 
     test('does not show the loading item when items are loaded', () => {
+      jest.spyOn(getEarthdataConfig, 'getEarthdataConfig').mockImplementationOnce(() => ({ cmrHost: 'http://cmr.example.com' }))
+
+      // mock fetchBrowseImage
+      const fetchBrowseImageMock = jest.spyOn(actions, 'fetchBrowseImage')
+      fetchBrowseImageMock.mockImplementation(() => jest.fn())
+
       const isItemLoadedMock = jest.fn()
         .mockReturnValue(true)
 

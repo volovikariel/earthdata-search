@@ -11,6 +11,7 @@ import Button from '../Button/Button'
 import SplitBadge from '../SplitBadge/SplitBadge'
 
 import './CollectionResultsItem.scss'
+import BrowseImageContainer from '../../containers/BrowseImageContainer/BrowseImageContainer'
 
 /**
  * Renders CollectionResultsItem.
@@ -23,6 +24,7 @@ import './CollectionResultsItem.scss'
  */
 export const CollectionResultsItem = forwardRef(({
   collection,
+  isScrolling,
   onAddProjectCollection,
   onRemoveCollectionFromProject,
   onViewCollectionDetails,
@@ -46,7 +48,6 @@ export const CollectionResultsItem = forwardRef(({
     isNrt,
     shortName,
     temporalRange,
-    thumbnail,
     versionId
   } = collection
 
@@ -208,15 +209,14 @@ export const CollectionResultsItem = forwardRef(({
       >
         <div className="collection-results-item__thumb">
           {
-            thumbnail && (
-              <img
-                className="collection-results-item__thumb-image"
-                src={thumbnail}
-                alt={`Thumbnail for ${datasetId}`}
-                height={thumbnailHeight}
-                width={thumbnailWidth}
-              />
-            )
+            <BrowseImageContainer
+              className="collection-results-item__thumb-image"
+              conceptId={collectionId}
+              conceptType="datasets"
+              height={thumbnailHeight}
+              isScrolling={isScrolling}
+              width={thumbnailWidth}
+            />
           }
         </div>
         <div className="collection-results-item__body">
@@ -367,6 +367,7 @@ CollectionResultsItem.displayName = 'CollectionResultsItem'
 
 CollectionResultsItem.propTypes = {
   collection: PropTypes.shape({}).isRequired,
+  isScrolling: PropTypes.bool.isRequired,
   onAddProjectCollection: PropTypes.func.isRequired,
   onRemoveCollectionFromProject: PropTypes.func.isRequired,
   onViewCollectionDetails: PropTypes.func.isRequired,

@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import BrowseImageContainer from '../../containers/BrowseImageContainer/BrowseImageContainer'
+
 import './GranuleResultsBrowseImageCell.scss'
 
 /**
@@ -8,54 +10,49 @@ import './GranuleResultsBrowseImageCell.scss'
  * @param {Object} props - The props passed into the component from react-table.
  * @param {Object} props.row - The row info.
  */
-export const GranuleResultsBrowseImageCell = ({ row }) => {
+export const GranuleResultsBrowseImageCell = (props) => {
+  const { row } = props
   const { original: rowProps } = row
   const {
     browseFlag,
     browseUrl,
-    granuleThumbnail,
+    id,
+    isScrolling,
     title
   } = rowProps
 
   const buildThumbnail = () => {
     let element = null
 
-    if (granuleThumbnail) {
+    if (browseFlag) {
       element = (
-        // eslint-disable-next-line jsx-a11y/img-redundant-alt
-        <img
-          className="granule-results-browse-image-cell__thumb-image"
-          src={granuleThumbnail}
-          height="60"
-          width="60"
+        <BrowseImageContainer
           alt={`Browse Image for ${title}`}
+          className="granule-results-browse-image-cell__thumb-image"
+          conceptId={id}
+          conceptType="granules"
+          height={60}
+          isScrolling={isScrolling}
+          width={60}
         />
       )
 
-      if (browseUrl) {
-        element = (
-          <a
-            className="granule-results-browse-image-cell__thumb"
-            href={browseUrl}
-            title="View image"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {element}
-          </a>
-        )
-      } else {
-        element = (
-          <div className="granule-results-browse-image-cell__thumb">
-            {element}
-          </div>
-        )
-      }
+      element = (
+        <a
+          className="granule-results-browse-image-cell__thumb"
+          href={browseUrl}
+          title="View image"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {element}
+        </a>
+      )
     }
     return element
   }
 
-  if (!browseFlag || !granuleThumbnail) {
+  if (!browseFlag) {
     return (
       <div className="granule-results-browse-image-cell" />
     )

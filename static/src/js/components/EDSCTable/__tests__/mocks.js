@@ -14,7 +14,6 @@ export const collectionData = [{
   isLast: true,
   isNrt: false,
   shortName: 'cId1',
-  thumbnail: 'http://some.test.com/thumbnail/url.jpg',
   temporalRange: '2010-10-10 to 2011-10-10',
   versionId: '2'
 }]
@@ -36,7 +35,6 @@ export const collectionDataTwo = [
     isLast: true,
     isNrt: false,
     shortName: 'cId1',
-    thumbnail: 'http://some.test.com/thumbnail/url.jpg',
     temporalRange: '2010-10-10 to 2011-10-10',
     versionId: '3'
   },
@@ -56,7 +54,6 @@ export const collectionDataTwo = [
     isLast: true,
     isNrt: false,
     shortName: 'cId1',
-    thumbnail: 'http://some.test.com/thumbnail/url.jpg',
     temporalRange: '2010-10-10 to 2011-10-10',
     versionId: '2'
   }

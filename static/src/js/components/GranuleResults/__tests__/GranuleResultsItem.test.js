@@ -3,8 +3,10 @@ import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import GranuleResultsItem from '../GranuleResultsItem'
 import GranuleResultsDataLinksButton from '../GranuleResultsDataLinksButton'
-import * as EventEmitter from '../../../events/events'
 import Button from '../../Button/Button'
+import {
+  BrowseImageContainer
+} from '../../../containers/BrowseImageContainer/BrowseImageContainer'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -15,6 +17,7 @@ function setup(type) {
     focusedGranule: '',
     isFocused: false,
     isLast: false,
+    isScrolling: false,
     location: { search: 'location' },
     onExcludeGranule: jest.fn(),
     onFocusedGranuleChange: jest.fn(),
@@ -35,7 +38,6 @@ function setup(type) {
         ],
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
-        granuleThumbnail: '/fake/path/image.jpg',
         title: 'Granule title',
         dataLinks: [
           {
@@ -61,7 +63,6 @@ function setup(type) {
         ],
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
-        granuleThumbnail: '/fake/path/image.jpg',
         title: 'Granule title',
         dataLinks: [
           {
@@ -136,7 +137,6 @@ function setup(type) {
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
         title: 'Granule title',
-        granuleThumbnail: '/fake/path/image.jpg',
         dataLinks: [
           {
             rel: 'http://linkrel/data#',
@@ -162,7 +162,7 @@ function setup(type) {
         timeEnd: '2019-04-29 23:59:59',
         title: 'Granule title',
         is_cwic: true,
-        granuleThumbnail: '/fake/path/image.jpg',
+        producer_granule_id: 'Granule title',
         dataLinks: [
           {
             rel: 'http://linkrel/data#',
@@ -187,7 +187,6 @@ function setup(type) {
         ],
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
-        granuleThumbnail: '/fake/path/image.jpg',
         title: 'Granule title',
         dataLinks: [
           {
@@ -228,10 +227,9 @@ describe('GranuleResultsItem component', () => {
       expect(enzymeWrapper.find('.granule-results-item__title').text()).toEqual('Granule title')
     })
 
-    test('renders the image', () => {
+    test('renders thumbnail', () => {
       const { enzymeWrapper } = setup('cmr')
-
-      expect(enzymeWrapper.find('.granule-results-item__thumb').find('img').prop('src')).toEqual('/fake/path/image.jpg')
+      expect(enzymeWrapper.find(BrowseImageContainer)).toBeDefined()
     })
 
     test('renders the start and end date', () => {
@@ -251,10 +249,9 @@ describe('GranuleResultsItem component', () => {
       expect(enzymeWrapper.find('.granule-results-item__title').text()).toEqual('Granule title')
     })
 
-    test('renders the image', () => {
+    test('renders thumbnail', () => {
       const { enzymeWrapper } = setup('cwic')
-
-      expect(enzymeWrapper.find('.granule-results-item__thumb').find('img').prop('src')).toEqual('/fake/path/image.jpg')
+      expect(enzymeWrapper.find(BrowseImageContainer)).toBeDefined()
     })
 
     test('renders the start and end date', () => {

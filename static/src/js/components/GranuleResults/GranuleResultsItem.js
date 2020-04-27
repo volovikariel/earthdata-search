@@ -8,6 +8,7 @@ import { getApplicationConfig } from '../../../../../sharedUtils/config'
 import PortalLinkContainer from '../../containers/PortalLinkContainer/PortalLinkContainer'
 import Button from '../Button/Button'
 import GranuleResultsDataLinksButton from './GranuleResultsDataLinksButton'
+import BrowseImageContainer from '../../containers/BrowseImageContainer/BrowseImageContainer'
 
 import './GranuleResultsItem.scss'
 
@@ -27,6 +28,7 @@ const thumbnailWidth = getApplicationConfig().thumbnailSize.width
 const GranuleResultsItem = forwardRef(({
   collectionId,
   granule,
+  isScrolling,
   location,
   onExcludeGranule,
   onFocusedGranuleChange,
@@ -51,7 +53,6 @@ const GranuleResultsItem = forwardRef(({
     browseFlag,
     browseUrl,
     dataLinks,
-    granuleThumbnail,
     handleClick,
     handleMouseEnter,
     handleMouseLeave,
@@ -66,15 +67,15 @@ const GranuleResultsItem = forwardRef(({
   const buildThumbnail = () => {
     let element = null
 
-    if (granuleThumbnail) {
+    if (browseFlag) {
       element = (
-        // eslint-disable-next-line jsx-a11y/img-redundant-alt
-        <img
+        <BrowseImageContainer
           className="granule-results-item__thumb-image"
-          src={granuleThumbnail}
+          conceptId={id}
+          conceptType="granules"
           height={thumbnailHeight}
+          isScrolling={isScrolling}
           width={thumbnailWidth}
-          alt={`Browse Image for ${title}`}
         />
       )
 
@@ -178,6 +179,7 @@ const GranuleResultsItem = forwardRef(({
 GranuleResultsItem.propTypes = {
   collectionId: PropTypes.string.isRequired,
   granule: PropTypes.shape({}).isRequired,
+  isScrolling: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,
   onExcludeGranule: PropTypes.func.isRequired,
   onFocusedGranuleChange: PropTypes.func.isRequired,

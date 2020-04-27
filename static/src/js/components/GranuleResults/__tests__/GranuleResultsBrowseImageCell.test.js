@@ -3,6 +3,9 @@ import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import { GranuleResultsBrowseImageCell } from '../GranuleResultsBrowseImageCell'
+import {
+  BrowseImageContainer
+} from '../../../containers/BrowseImageContainer/BrowseImageContainer'
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -52,34 +55,13 @@ describe('GranuleResultsBrowseImageCell component', () => {
     })
   })
 
-  describe('when given a valid image', () => {
-    test('renders itself correctly', () => {
-      const { enzymeWrapper } = setup({
-        row: {
-          original: {
-            browseFlag: true,
-            granuleThumbnail: 'http://someplace.com/src/image.jpg'
-          }
-        }
-      })
-
-      expect(enzymeWrapper.type()).toBe('div')
-      expect(enzymeWrapper.children().length).toEqual(1)
-      expect(enzymeWrapper.childAt(0).props().className).toEqual('granule-results-browse-image-cell__thumb')
-      expect(enzymeWrapper.childAt(0).type()).toEqual('div')
-      expect(enzymeWrapper.childAt(0).childAt(0).type()).toEqual('img')
-      expect(enzymeWrapper.childAt(0).childAt(0).props().src).toEqual('http://someplace.com/src/image.jpg')
-    })
-  })
-
   describe('when given a valid image and browse url', () => {
     test('renders itself correctly', () => {
       const { enzymeWrapper } = setup({
         row: {
           original: {
             browseFlag: true,
-            browseUrl: 'http://someplace.com/browse/link',
-            granuleThumbnail: 'http://someplace.com/src/image.jpg'
+            browseUrl: 'http://someplace.com/browse/link'
           }
         }
       })
@@ -89,8 +71,7 @@ describe('GranuleResultsBrowseImageCell component', () => {
       expect(enzymeWrapper.childAt(0).props().className).toEqual('granule-results-browse-image-cell__thumb')
       expect(enzymeWrapper.childAt(0).type()).toEqual('a')
       expect(enzymeWrapper.childAt(0).props().href).toEqual('http://someplace.com/browse/link')
-      expect(enzymeWrapper.childAt(0).childAt(0).type()).toEqual('img')
-      expect(enzymeWrapper.childAt(0).childAt(0).props().src).toEqual('http://someplace.com/src/image.jpg')
+      expect(enzymeWrapper.childAt(0).find(BrowseImageContainer)).toBeDefined()
     })
   })
 })
