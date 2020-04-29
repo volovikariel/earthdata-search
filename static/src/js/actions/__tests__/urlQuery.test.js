@@ -34,8 +34,6 @@ describe('updateStore', () => {
 
     const getCollectionsMock = jest.spyOn(actions, 'getCollections').mockImplementation(() => jest.fn())
     const getFocusedCollectionMock = jest.spyOn(actions, 'getFocusedCollection').mockImplementation(() => jest.fn())
-    const getProjectCollectionsMock = jest.spyOn(actions, 'getProjectCollections')
-      .mockImplementation(() => new Promise(resolve => resolve(null)))
     const getTimelineMock = jest.spyOn(actions, 'getTimeline').mockImplementation(() => jest.fn())
 
     const store = mockStore({
@@ -55,7 +53,6 @@ describe('updateStore', () => {
 
     expect(getCollectionsMock).toBeCalledTimes(1)
     expect(getFocusedCollectionMock).toBeCalledTimes(1)
-    expect(getProjectCollectionsMock).toBeCalledTimes(1)
     expect(getTimelineMock).toBeCalledTimes(1)
   })
 })

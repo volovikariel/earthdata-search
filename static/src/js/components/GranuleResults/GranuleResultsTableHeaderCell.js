@@ -14,13 +14,16 @@ const GranuleResultsTableHeaderCell = (props) => {
   const {
     id,
     isCwic,
-    dataLinks,
+    getDataLinks,
+    links,
     onlineAccessFlag,
-    handleClick
+    handleClick,
+    original
   } = rowProps
 
   const {
     collectionId,
+    focusedGranule,
     location,
     onExcludeGranule,
     onFocusedGranuleChange,
@@ -39,6 +42,8 @@ const GranuleResultsTableHeaderCell = (props) => {
     })
   }
 
+  const dataLinks = getDataLinks(links)
+
   return (
     <>
       <Button
@@ -46,7 +51,7 @@ const GranuleResultsTableHeaderCell = (props) => {
         variant="naked"
         label={value}
         title={value}
-        onClick={handleClick}
+        onClick={() => handleClick(original, id, focusedGranule)}
       >
         <h4 className="granule-results-table__granule-name">
           {value}

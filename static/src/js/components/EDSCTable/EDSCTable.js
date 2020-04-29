@@ -242,10 +242,8 @@ const EDSCTable = ({
     ({
       data,
       index,
-      isScrolling,
       style
     }) => {
-      console.log('row', isScrolling)
       const {
         isItemLoaded
       } = data
@@ -372,7 +370,6 @@ const EDSCTable = ({
                       itemData={{
                         isItemLoaded
                       }}
-                      useIsScrolling
                     >
                       {Row}
                     </List>

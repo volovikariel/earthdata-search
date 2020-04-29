@@ -65,8 +65,7 @@ export const updateStore = ({
 
     // Create a unique list of collections to fetch and remove any empty values [.filter(Boolean)]
     const uniqueCollectionList = [...new Set([
-      ...collectionIds,
-      focusedCollection
+      ...collectionIds
     ])].filter(Boolean)
 
     if (uniqueCollectionList.length > 0) {

@@ -1,5 +1,3 @@
-import { eventEmitter } from '../events/events'
-import { createDataLinks } from './granules'
 import { getEarthdataConfig } from '../../../../sharedUtils/config'
 import { cmrEnv } from '../../../../sharedUtils/cmrEnv'
 
@@ -16,83 +14,64 @@ import { cmrEnv } from '../../../../sharedUtils/cmrEnv'
  * @param {String} focusedGranule - The focused granule.
  * @returns {GranuleListInfo} - The return object
  */
-export const formatGranulesList = (granules, granuleIds, focusedGranule) => {
-  let hasBrowseImagery = false
+export const formatGranulesList = (
+  granules,
+  granuleIds,
+  focusedGranule,
+  getDataLinks,
+  handleClick,
+  handleMouseEnter,
+  handleMouseLeave
+) => granuleIds.map((granuleId) => {
+  const granule = granules.byId[granuleId]
 
-  const granulesList = granuleIds.map((granuleId) => {
-    const granule = granules.byId[granuleId]
+  const original = granule
 
-    const original = granule
+  const isFocused = focusedGranule === granuleId
 
-    const isFocused = focusedGranule === granuleId
+  const { cmrHost } = getEarthdataConfig(cmrEnv())
+  const browseUrl = `${cmrHost}/browse-scaler/browse_images/datasets/${granuleId}`
+  const {
+    browse_flag: browseFlag,
+    day_night_flag: dayNightFlag,
+    formatted_temporal: formattedTemporal,
+    id,
+    links,
+    online_access_flag: onlineAccessFlag,
+    original_format: originalFormat,
+    producer_granule_id: producerGranuleId,
+    thumbnail: granuleThumbnail,
+    title: granuleTitle
+  } = granule
 
-    const { cmrHost } = getEarthdataConfig(cmrEnv())
-    const browseUrl = `${cmrHost}/browse-scaler/browse_images/datasets/${granuleId}`
-    const {
-      browse_flag: browseFlag,
-      // browse_url: browseUrl,
-      day_night_flag: dayNightFlag,
-      formatted_temporal: formattedTemporal,
-      id,
-      links,
-      online_access_flag: onlineAccessFlag,
-      original_format: originalFormat,
-      producer_granule_id: producerGranuleId,
-      thumbnail: granuleThumbnail,
-      title: granuleTitle
-    } = granule
+  const title = producerGranuleId || granuleTitle
+  const temporal = formattedTemporal
+  const [timeStart, timeEnd] = temporal
+  const thumbnail = browseFlag ? granuleThumbnail : false
 
-    if (browseFlag && !hasBrowseImagery) hasBrowseImagery = true
-
-    const title = producerGranuleId || granuleTitle
-    const temporal = formattedTemporal
-    const [timeStart, timeEnd] = temporal
-    const thumbnail = browseFlag ? granuleThumbnail : false
-
-    const dataLinks = createDataLinks(links)
-    const isFocusedGranule = isFocused || focusedGranule === id
-
-    const handleClick = () => {
-      let stickyGranule = original
-      if (id === focusedGranule) stickyGranule = null
-      eventEmitter.emit('map.stickygranule', { granule: stickyGranule })
-    }
-
-    const handleMouseEnter = () => {
-      eventEmitter.emit('map.focusgranule', { granule: original })
-    }
-
-    const handleMouseLeave = () => {
-      eventEmitter.emit('map.focusgranule', { granule: null })
-    }
-
-    return {
-      browseFlag,
-      browseUrl,
-      dataLinks,
-      dayNightFlag,
-      formattedTemporal,
-      id,
-      links,
-      onlineAccessFlag,
-      original,
-      originalFormat,
-      producerGranuleId,
-      granuleThumbnail,
-      title,
-      temporal,
-      timeStart,
-      timeEnd,
-      thumbnail,
-      isFocusedGranule,
-      handleClick,
-      handleMouseEnter,
-      handleMouseLeave
-    }
-  })
+  const isFocusedGranule = isFocused || focusedGranule === id
 
   return {
-    granulesList,
-    hasBrowseImagery
+    browseFlag,
+    browseUrl,
+    dayNightFlag,
+    formattedTemporal,
+    id,
+    links,
+    onlineAccessFlag,
+    original,
+    originalFormat,
+    producerGranuleId,
+    granuleThumbnail,
+    title,
+    temporal,
+    timeStart,
+    timeEnd,
+    thumbnail,
+    isFocusedGranule,
+    getDataLinks,
+    handleClick,
+    handleMouseEnter,
+    handleMouseLeave
   }
-}
+})

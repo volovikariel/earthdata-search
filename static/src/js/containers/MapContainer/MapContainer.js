@@ -1,5 +1,3 @@
-/* eslint-disable no-underscore-dangle */
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -18,7 +16,7 @@ import { metricsMap } from '../../middleware/metrics/actions'
 
 import LayerBuilder
   from '../../components/Map/LayerBuilder'
-import ConnectedSpatialSelectionContainer
+import SpatialSelectionContainer
   from '../SpatialSelectionContainer/SpatialSelectionContainer'
 import GranuleGridLayer
   from '../../components/Map/GranuleGridLayer'
@@ -90,6 +88,7 @@ export class MapContainer extends Component {
   onMapReady(e) {
     const { target: map } = e
 
+    // eslint-disable-next-line no-underscore-dangle
     this.controlContainer = map._controlContainer
     const layersControl = this.controlContainer.querySelector('.leaflet-control-layers-list')
 
@@ -359,7 +358,7 @@ export class MapContainer extends Component {
           )
         }
         <ScaleControl position="bottomright" />
-        <ConnectedSpatialSelectionContainer mapRef={this.mapRef} />
+        <SpatialSelectionContainer mapRef={this.mapRef} />
         {
           !isProjectPage && (
           <ShapefileLayer

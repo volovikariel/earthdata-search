@@ -39,13 +39,18 @@ function setup(type) {
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
         title: 'Granule title',
-        dataLinks: [
+        links: [
           {
             rel: 'http://linkrel/data#',
             title: 'linktitle',
             href: 'http://linkhref'
           }
-        ]
+        ],
+        getDataLinks: () => [{
+          rel: 'http://linkrel/data#',
+          title: 'linktitle',
+          href: 'http://linkhref'
+        }]
       }
     }
   }
@@ -64,13 +69,18 @@ function setup(type) {
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
         title: 'Granule title',
-        dataLinks: [
+        links: [
           {
             rel: 'http://linkrel/data#',
             title: 'linktitle',
             href: 's3://bucket/filename'
           }
-        ]
+        ],
+        getDataLinks: () => [{
+          rel: 'http://linkrel/data#',
+          title: 'linktitle',
+          href: 'http://linkhref'
+        }]
       }
     }
   }
@@ -90,13 +100,14 @@ function setup(type) {
         timeEnd: '2019-04-29 23:59:59',
         granuleThumbnail: '/fake/path/image.jpg',
         title: 'Granule title',
-        dataLinks: [
+        links: [
           {
             rel: 'http://linkrel',
             title: 'linktitle',
             href: 'http://linkhref'
           }
-        ]
+        ],
+        getDataLinks: () => []
       }
     }
   }
@@ -113,13 +124,18 @@ function setup(type) {
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
         title: 'Granule title',
-        dataLinks: [
+        links: [
           {
             rel: 'http://linkrel/data#',
             title: 'linktitle',
             href: 'http://linkhref'
           }
-        ]
+        ],
+        getDataLinks: () => [{
+          rel: 'http://linkrel/data#',
+          title: 'linktitle',
+          href: 'http://linkhref'
+        }]
       }
     }
   }
@@ -137,13 +153,18 @@ function setup(type) {
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
         title: 'Granule title',
-        dataLinks: [
+        links: [
           {
             rel: 'http://linkrel/data#',
             title: 'linktitle',
             href: 'http://linkhref'
           }
-        ]
+        ],
+        getDataLinks: () => [{
+          rel: 'http://linkrel/data#',
+          title: 'linktitle',
+          href: 'http://linkhref'
+        }]
       }
     }
   }
@@ -163,13 +184,14 @@ function setup(type) {
         title: 'Granule title',
         is_cwic: true,
         producer_granule_id: 'Granule title',
-        dataLinks: [
+        links: [
           {
             rel: 'http://linkrel/data#',
             title: 'linktitle',
             href: 'http://linkhref'
           }
-        ]
+        ],
+        getDataLinks: () => []
       }
     }
   }
@@ -188,13 +210,14 @@ function setup(type) {
         timeStart: '2019-04-28 00:00:00',
         timeEnd: '2019-04-29 23:59:59',
         title: 'Granule title',
-        dataLinks: [
+        links: [
           {
             rel: 'http://linkrel/data#',
             title: 'linktitle',
             href: 'http://linkhref'
           }
-        ]
+        ],
+        getDataLinks: () => []
       },
       isLast: true
     }

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 
@@ -33,13 +33,11 @@ const CollectionResultsBody = ({
   panelView
 }) => {
   const {
-    allIds: collectionIds,
     hits: collectionHits,
     isLoading
   } = collections
 
-  const collectionList = useMemo(() => formatCollectionList(collections, projectIds, browser),
-    [collectionIds, projectIds])
+  const collectionList = formatCollectionList(collections, projectIds, browser)
 
   const [visibleMiddleIndex, setVisibleMiddleIndex] = useState(null)
 

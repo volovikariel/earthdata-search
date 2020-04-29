@@ -1,9 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import { getApplicationConfig } from '../../../../../sharedUtils/config'
 import BrowseImageContainer from '../../containers/BrowseImageContainer/BrowseImageContainer'
 
 import './GranuleResultsBrowseImageCell.scss'
+
+const { thumbnailSize } = getApplicationConfig()
+const {
+  height: thumbnailHeight,
+  width: thumbnailWidth
+} = thumbnailSize
 
 /**
  * Renders GranuleResultsBrowseImageCell.
@@ -17,7 +24,6 @@ export const GranuleResultsBrowseImageCell = (props) => {
     browseFlag,
     browseUrl,
     id,
-    isScrolling,
     title
   } = rowProps
 
@@ -31,9 +37,8 @@ export const GranuleResultsBrowseImageCell = (props) => {
           className="granule-results-browse-image-cell__thumb-image"
           conceptId={id}
           conceptType="granules"
-          height={60}
-          isScrolling={isScrolling}
-          width={60}
+          height={thumbnailHeight}
+          width={thumbnailWidth}
         />
       )
 

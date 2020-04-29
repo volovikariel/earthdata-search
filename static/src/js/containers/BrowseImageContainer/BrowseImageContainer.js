@@ -1,34 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import actions from '../../actions'
 import BrowseImage from '../../components/BrowseImage/BrowseImage'
 import FloatingBrowseImage from '../../components/FloatingBrowseImage/FloatingBrowseImage'
 
-const mapStateToProps = state => ({
-  browseImagery: state.browseImagery
-})
-
-const mapDispatchToProps = dispatch => ({
-  onFetchBrowseImage:
-    (conceptType, conceptId, height, width) => dispatch(
-      actions.fetchBrowseImage(conceptType, conceptId, height, width)
-    )
-})
-
 export const BrowseImageContainer = ({
-  browseImagery,
   className,
   conceptId,
   conceptType,
   height,
   isFloating,
   isScrolling,
-  onFetchBrowseImage,
   width
 }) => {
   if (conceptId == null) return null
+
+  const browseImagery = useSelector(state => state.browseImagery)
+
+  const dispatch = useDispatch()
 
   const { [conceptId]: browseImageState = {} } = browseImagery
   const { [height]: browseImage = {} } = browseImageState
@@ -57,10 +48,17 @@ export const BrowseImageContainer = ({
     // If there is already a localUrl dont attempt to retrieve it again
     if (localUrl) return
 
+    // Only make the request if were stopped where the image is visible
+    if (isScrolling === true) return
+
+    // If concept id is set to an actual value
+    if (conceptId && conceptId === '') return
+
+    // Don't fire another request if one is currently in flight
+    if (isLoading === true) return
+
     // No need to fetch the image if the user is scrolling by the image or it has already been retrieved
-    if (isScrolling === false && conceptId) {
-      onFetchBrowseImage(conceptType, conceptId, height, width)
-    }
+    dispatch(actions.fetchBrowseImage(conceptType, conceptId, height, width))
   }, [isScrolling, conceptId])
 
   if (isFloating) {
@@ -99,15 +97,13 @@ BrowseImageContainer.defaultProps = {
 }
 
 BrowseImageContainer.propTypes = {
-  browseImagery: PropTypes.shape({}).isRequired,
   className: PropTypes.string,
   conceptId: PropTypes.string,
   conceptType: PropTypes.string.isRequired,
   height: PropTypes.number.isRequired,
   isFloating: PropTypes.bool,
   isScrolling: PropTypes.bool,
-  onFetchBrowseImage: PropTypes.func.isRequired,
   width: PropTypes.number.isRequired
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrowseImageContainer)
+export default BrowseImageContainer

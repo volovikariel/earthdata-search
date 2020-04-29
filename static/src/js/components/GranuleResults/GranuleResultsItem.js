@@ -12,8 +12,11 @@ import BrowseImageContainer from '../../containers/BrowseImageContainer/BrowseIm
 
 import './GranuleResultsItem.scss'
 
-const thumbnailHeight = getApplicationConfig().thumbnailSize.height
-const thumbnailWidth = getApplicationConfig().thumbnailSize.width
+const { thumbnailSize } = getApplicationConfig()
+const {
+  height: thumbnailHeight,
+  width: thumbnailWidth
+} = thumbnailSize
 
 /**
  * Renders GranuleResultsItem.
@@ -27,6 +30,7 @@ const thumbnailWidth = getApplicationConfig().thumbnailSize.width
  */
 const GranuleResultsItem = forwardRef(({
   collectionId,
+  focusedGranule,
   granule,
   isScrolling,
   location,
@@ -52,17 +56,21 @@ const GranuleResultsItem = forwardRef(({
   const {
     browseFlag,
     browseUrl,
-    dataLinks,
+    getDataLinks,
     handleClick,
     handleMouseEnter,
     handleMouseLeave,
     id,
+    links,
     isFocusedGranule,
     onlineAccessFlag,
     timeEnd,
     timeStart,
     title
   } = granule
+
+  const dataLinks = getDataLinks(links)
+  console.log(dataLinks)
 
   const buildThumbnail = () => {
     let element = null
@@ -109,19 +117,21 @@ const GranuleResultsItem = forwardRef(({
     }
   ])
 
+  const { original } = granule
+
   return (
     <div
       ref={ref}
       className={granuleResultsItemClasses}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      onMouseEnter={() => handleMouseEnter(original)}
+      onMouseLeave={() => handleMouseLeave()}
     >
       <header
         className="granule-results-item__header"
         role="button"
         tabIndex={0}
-        onClick={handleClick}
-        onKeyPress={handleClick}
+        onClick={() => handleClick(original, id, focusedGranule)}
+        onKeyPress={() => handleClick(original, id, focusedGranule)}
       >
         <h3 className="granule-results-item__title">{title}</h3>
       </header>
@@ -178,6 +188,7 @@ const GranuleResultsItem = forwardRef(({
 
 GranuleResultsItem.propTypes = {
   collectionId: PropTypes.string.isRequired,
+  focusedGranule: PropTypes.string.isRequired,
   granule: PropTypes.shape({}).isRequired,
   isScrolling: PropTypes.bool.isRequired,
   location: PropTypes.shape({}).isRequired,

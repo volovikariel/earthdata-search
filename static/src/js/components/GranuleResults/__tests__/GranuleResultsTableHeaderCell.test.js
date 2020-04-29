@@ -11,6 +11,7 @@ function setup(overrideProps) {
     column: {
       customProps: {
         collectionId: 'collectionId',
+        focusedGranule: 'one',
         location: {},
         onExcludeGranule: jest.fn(),
         onFocusedGranuleChange: jest.fn(),
@@ -24,9 +25,18 @@ function setup(overrideProps) {
       original: {
         id: 'one',
         isCwic: false,
-        dataLinks: [],
+        links: [],
         onlineAccessFlag: true,
-        handleClick: jest.fn()
+        handleClick: jest.fn(),
+        handleMouseEnter: jest.fn(),
+        handleMouseLeave: jest.fn(),
+        getDataLinks: () => [],
+        original: {
+          id: 'one',
+          is_cwic: false,
+          links: [],
+          online_access_flag: true
+        }
       }
     },
     ...overrideProps
@@ -56,7 +66,12 @@ describe('GranuleResultsTableHeaderCell component', () => {
     titleButton.simulate('click')
 
     expect(props.row.original.handleClick).toHaveBeenCalledTimes(1)
-    expect(props.row.original.handleClick).toHaveBeenCalledWith()
+    expect(props.row.original.handleClick).toHaveBeenCalledWith({
+      id: 'one',
+      is_cwic: false,
+      links: [],
+      online_access_flag: true
+    }, 'one', 'one')
   })
 
   test('clicking the details button calls onViewCollectionDetails', () => {
@@ -85,9 +100,10 @@ describe('GranuleResultsTableHeaderCell component', () => {
         original: {
           id: 'one',
           isCwic: true,
-          dataLinks: [],
+          links: [],
           onlineAccessFlag: true,
-          handleClick: jest.fn()
+          handleClick: jest.fn(),
+          getDataLinks: () => []
         }
       }
     })

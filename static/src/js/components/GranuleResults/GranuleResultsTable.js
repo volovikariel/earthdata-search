@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import Cell from '../EDSCTable/EDSCTableCell'
@@ -46,6 +46,7 @@ export const GranuleResultsTable = ({
       width: '325',
       customProps: {
         cellClassName: 'granule-results-table__cell--granule',
+        focusedGranule,
         location,
         collectionId,
         onExcludeGranule,
@@ -104,23 +105,23 @@ export const GranuleResultsTable = ({
     isFocusedGranule
   }), [focusedGranule])
 
-  const rowClassNamesFromRowState = useMemo(() => ({ isFocusedGranule }) => {
+  const rowClassNamesFromRowState = ({ isFocusedGranule }) => {
     const classNames = []
     if (isFocusedGranule) classNames.push('granule-results-table__td--selected')
     return classNames
-  })
+  }
 
-  const onRowMouseEnter = useCallback((e, row) => {
+  const onRowMouseEnter = (e, row) => {
     const { original: rowOriginal } = row
-    const { handleMouseEnter } = rowOriginal
-    if (handleMouseEnter) handleMouseEnter(e, row)
-  }, [])
+    const { handleMouseEnter, original } = rowOriginal
+    if (handleMouseEnter) handleMouseEnter(original)
+  }
 
-  const onRowMouseLeave = useCallback((e, row) => {
+  const onRowMouseLeave = (e, row) => {
     const { original: rowOriginal } = row
     const { handleMouseLeave } = rowOriginal
-    if (handleMouseLeave) handleMouseLeave(e, row)
-  }, [])
+    if (handleMouseLeave) handleMouseLeave()
+  }
 
   const hiddenColumns = []
 

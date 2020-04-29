@@ -16,8 +16,7 @@ export const granuleData = [
         title: 'linktitle',
         href: 'http://linkhref'
       }
-    ],
-    handleMouseEnter: jest.fn()
+    ]
   },
   {
     id: 'two',
@@ -36,7 +35,6 @@ export const granuleData = [
         title: 'linktitle',
         href: 'http://linkhref'
       }
-    ],
-    handleMouseEnter: jest.fn()
+    ]
   }
 ]

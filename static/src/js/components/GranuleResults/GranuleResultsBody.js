@@ -1,9 +1,11 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { CSSTransition } from 'react-transition-group'
 
-import { getGranuleIds } from '../../util/getGranuleIds'
+import { createDataLinks } from '../../util/granules'
+import { eventEmitter } from '../../events/events'
 import { formatGranulesList } from '../../util/formatGranulesList'
+import { getGranuleIds } from '../../util/getGranuleIds'
 
 import Spinner from '../Spinner/Spinner'
 import GranuleResultsList from './GranuleResultsList'
@@ -56,14 +58,35 @@ const GranuleResultsBody = ({
 
   const loadTimeInSeconds = (loadTime / 1000).toFixed(1)
 
-  // eslint-disable-next-line arrow-body-style
-  const result = useMemo(() => {
-    return formatGranulesList(granules, granuleIds, focusedGranule)
-  }, [granules, granuleIds, focusedGranule, excludedGranuleIds])
-
   const [visibleMiddleIndex, setVisibleMiddleIndex] = useState(null)
 
-  const { granulesList, hasBrowseImagery } = result
+  const getDataLinks = useCallback(links => createDataLinks(links), [])
+
+  const handleClick = useCallback((original, id, focusedGranule) => {
+    let stickyGranule = original
+    if (id === focusedGranule) stickyGranule = null
+    eventEmitter.emit('map.stickygranule', { granule: stickyGranule })
+  }, [focusedGranule])
+
+  const handleMouseEnter = useCallback((original) => {
+    eventEmitter.emit('map.focusgranule', { granule: original })
+  }, [])
+
+  const handleMouseLeave = useCallback(() => {
+    eventEmitter.emit('map.focusgranule', { granule: null })
+  }, [])
+
+  const granulesList = useMemo(() => formatGranulesList(
+    granules,
+    granuleIds,
+    focusedGranule,
+    getDataLinks,
+    handleClick,
+    handleMouseEnter,
+    handleMouseLeave
+  ), [granules, granuleIds, focusedGranule, excludedGranuleIds])
+
+  const hasBrowseImagery = granulesList.some(({ browseFlag }) => browseFlag)
 
   // Determine if another page is available by checking if there are more collections to load,
   // or if we have no collections and collections are loading. This controls whether or not the
@@ -133,8 +156,8 @@ const GranuleResultsBody = ({
           granules={granulesList}
           hasBrowseImagery={hasBrowseImagery}
           isCwic={isCwic}
-          isItemLoaded={isItemLoaded}
           itemCount={itemCount}
+          isItemLoaded={isItemLoaded}
           location={location}
           loadMoreItems={loadMoreItems}
           onExcludeGranule={onExcludeGranule}

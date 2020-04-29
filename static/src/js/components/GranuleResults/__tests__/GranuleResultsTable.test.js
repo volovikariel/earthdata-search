@@ -81,47 +81,34 @@ describe('GranuleResultsTable component', () => {
 
       table.props().onRowMouseEnter({ event: 'event' }, {
         original: {
-          handleMouseEnter: handleMouseEnterMock
+          handleMouseEnter: handleMouseEnterMock,
+          original: {
+            id: 'one'
+          }
         }
       })
 
       expect(handleMouseEnterMock).toHaveBeenCalledTimes(1)
-      expect(handleMouseEnterMock).toHaveBeenCalledWith(
-        {
-          event: 'event'
-        },
-        {
-          original: {
-            handleMouseEnter: handleMouseEnterMock
-          }
-        }
-      )
+      expect(handleMouseEnterMock).toHaveBeenCalledWith({
+        id: 'one'
+      })
     })
   })
 
   describe('onRowMouseLeave', () => {
     test('fires the callback with the correct values', () => {
-      const handleMouseEnterLeave = jest.fn()
+      const handleMouseLeaveMock = jest.fn()
       const { enzymeWrapper } = setup()
       const table = enzymeWrapper.find(EDSCTable)
 
       table.props().onRowMouseLeave({ event: 'event' }, {
         original: {
-          handleMouseLeave: handleMouseEnterLeave
+          handleMouseLeave: handleMouseLeaveMock
         }
       })
 
-      expect(handleMouseEnterLeave).toHaveBeenCalledTimes(1)
-      expect(handleMouseEnterLeave).toHaveBeenCalledWith(
-        {
-          event: 'event'
-        },
-        {
-          original: {
-            handleMouseLeave: handleMouseEnterLeave
-          }
-        }
-      )
+      expect(handleMouseLeaveMock).toHaveBeenCalledTimes(1)
+      expect(handleMouseLeaveMock).toHaveBeenCalledWith()
     })
   })
 

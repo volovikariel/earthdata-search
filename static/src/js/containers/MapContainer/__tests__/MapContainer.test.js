@@ -11,7 +11,7 @@ import {
 import { MapContainer } from '../MapContainer'
 import ZoomHome from '../../../components/Map/ZoomHome'
 import LayerBuilder from '../../../components/Map/LayerBuilder'
-import ConnectedSpatialSelectionContainer
+import { SpatialSelectionContainer }
   from '../../SpatialSelectionContainer/SpatialSelectionContainer'
 import GranuleGridLayer from '../../../components/Map/GranuleGridLayer'
 
@@ -74,13 +74,12 @@ describe('MapContainer component', () => {
   test('should render self and controls', () => {
     const { enzymeWrapper } = setup()
     expect(enzymeWrapper.exists()).toBe(true)
-
     expect(enzymeWrapper.find(Map).length).toBe(1)
     expect(enzymeWrapper.find(LayersControl).length).toBe(1)
     expect(enzymeWrapper.find(ScaleControl).length).toBe(1)
     expect(enzymeWrapper.find(ZoomHome).length).toBe(1)
     expect(enzymeWrapper.find(LayerBuilder).length).toBe(6)
-    expect(enzymeWrapper.find(ConnectedSpatialSelectionContainer).length).toBe(1)
+    expect(enzymeWrapper.find(SpatialSelectionContainer).length).toBe(1)
     expect(enzymeWrapper.find(GranuleGridLayer).length).toBe(1)
   })
 
