@@ -158,6 +158,21 @@ describe('SearchForm component', () => {
 
       expect(props.onCancelAutocomplete).toHaveBeenCalledTimes(1)
     })
+
+    test('stops event propagation on keydown', () => {
+      const { enzymeWrapper } = setup()
+
+      const stopPropagationMock = jest.fn()
+      const event = {
+        stopPropagation: stopPropagationMock
+      }
+
+      // Fake the onKeyDown event by calling the function passed into the inputProps
+      // and mocking the stopPropagation call
+      enzymeWrapper.find('Autosuggest').props().inputProps.onKeyDown(event)
+
+      expect(stopPropagationMock).toHaveBeenCalledTimes(1)
+    })
   })
 
   describe('onWindowKeydown', () => {

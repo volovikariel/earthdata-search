@@ -324,7 +324,12 @@ class SearchForm extends Component {
                 className: 'search-form__input',
                 placeholder: 'Search for collections or topics',
                 value: keywordSearch,
-                onChange: this.onAutoSuggestChange
+                onChange: this.onAutoSuggestChange,
+                onKeyDown: (e) => {
+                  // Preventing propagation of the keydown event. This prevents the accidental triggering
+                  // of keyboard shortcuts while typing in the input.
+                  e.stopPropagation()
+                }
               }}
             />
           </form>
