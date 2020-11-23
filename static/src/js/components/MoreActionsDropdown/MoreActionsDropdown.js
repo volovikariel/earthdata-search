@@ -5,10 +5,24 @@ import { Dropdown } from 'react-bootstrap'
 import classNames from 'classnames'
 import MoreActionsToggle from '../CustomToggle/MoreActionsToggle'
 
+import './MoreActionsDropdown.scss'
+
+console.log('ReactDOM in component', ReactDOM)
+
+/**
+ * Renders MoreActionsDropdown.
+ * @param {Object} props - The props passed into the component.
+ * @param {Boolean} props.alignRight - Flag to designate the dropdown aligned right
+ * @param {String} props.className - String to use as the classname
+ * @param {Node} props.children - A group of MoreActionDropdownItem components
+ * @param {Boolean} props.dark - Flag to designate the dark color scheme
+ * @param {Array} props.handoffLinks - An array of objects to create the handoff links
+ */
 export const MoreActionsDropdown = ({
   alignRight,
-  children,
   className,
+  children,
+  dark,
   handoffLinks
 }) => {
   const moreActionClasses = classNames(
@@ -17,8 +31,15 @@ export const MoreActionsDropdown = ({
     'more-actions-dropdown'
   )
 
+  console.log('ReactDOM in render', ReactDOM)
+  console.log('getting here', document.getElementById('root'))
+
+  // console.error('document in component', document.getElementById('root'))
+  // console.error({ children, handoffLinks })
+
   // Don't render the dropdown if there are no elements to render
   if (children == null && handoffLinks.length === 0) return null
+
 
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events
@@ -27,7 +48,7 @@ export const MoreActionsDropdown = ({
       onClick={e => e.stopPropagation()}
       onKeyPress={e => e.stopPropagation()}
     >
-      <Dropdown className="more-actions-dropdown__dropdown">
+      <Dropdown className="more-actions-dropdown__dropdown dropdown-dark">
         <Dropdown.Toggle
           className="more-actions-dropdown__toggle"
           as={MoreActionsToggle}
@@ -35,7 +56,7 @@ export const MoreActionsDropdown = ({
         {
           ReactDOM.createPortal(
             <Dropdown.Menu
-              className="more-actions-dropdown__menu dropdown-menu--carat-right dropdown-menu--condensed"
+              className={`more-actions-dropdown__menu dropdown-menu--carat-right dropdown-menu--condensed ${dark ? 'dropdown-menu-dark' : ''}`}
               alignRight={alignRight}
             >
               {children}
@@ -72,6 +93,7 @@ MoreActionsDropdown.defaultProps = {
   alignRight: true,
   children: null,
   className: null,
+  dark: false,
   handoffLinks: []
 }
 
@@ -79,6 +101,7 @@ MoreActionsDropdown.propTypes = {
   alignRight: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
+  dark: PropTypes.bool,
   handoffLinks: PropTypes.arrayOf(PropTypes.shape({}))
 }
 

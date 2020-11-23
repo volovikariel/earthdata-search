@@ -42,13 +42,6 @@
     }
   }
 
-  &__cwic-note {
-    display: block;
-    margin-bottom: $spacer/2;
-    color: $color__black--400;
-    font-size: 0.875rem;
-  }
-
   &__cwic-emph {
     font-weight: 700;
     color: $color__yellow;
@@ -85,7 +78,7 @@
     align-items: center;
     padding: $spacer/4 $spacer;
     border-top: 1px solid $color__black--200;
-    font-size: 0.75rem;
+    font-size: 0.725rem;
     color: $color__black--600;
   }
 

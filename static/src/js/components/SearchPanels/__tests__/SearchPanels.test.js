@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Enzyme, { mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { Provider } from 'react-redux'
@@ -10,18 +11,80 @@ import Panels from '../../Panels/Panels'
 
 const store = configureStore()
 
+Enzyme.configure({ adapter: new Adapter() })
+
+console.log(jest.requireActual('react-dom'))
+
+jest.mock('react-dom', () => (
+  {
+    ...(jest.requireActual('react-dom')),
+    createPortal: jest.fn(),
+    unstable_createPortal: jest.fn()
+  }
+))
+
+console.log('ReactDOM', ReactDOM)
+
 beforeEach(() => {
-  jest.clearAllMocks()
+  // jest.clearAllMocks()
+  const div = document.createElement('div')
+  div.setAttribute('id', 'root')
+  document.body.appendChild(div)
+  document.getElementById = jest.fn().mockImplementation((id) => {
+    console.log('mocked get element by id', id)
+    return id === 'root' ? 'root-dom' : null
+  })
 })
 
-Enzyme.configure({ adapter: new Adapter() })
+afterEach(() => {
+  const div = document.getElementById('root')
+  if (div) {
+    document.body.removeChild(div)
+  }
+})
 
 function setup(overrideProps, location = '/search') {
   const props = {
-    location: {},
+    collectionMetadata: {
+      hasAllMetadata: true,
+      title: 'Collection Title',
+      isCwic: false
+    },
+    collectionQuery: {
+      pageNum: 1,
+      sortKey: ['']
+    },
+    collectionsSearch: {
+      allIds: ['COLL_ID_1'],
+      hits: 1,
+      isLoading: false,
+      isLoaded: true
+    },
+    granuleMetadata: {
+      title: 'Granule Title'
+    },
+    granuleSearchResults: {
+      allIds: [],
+      hits: 0,
+      isLoading: false,
+      isLoaded: false
+    },
+    granuleQuery: {
+      pageNum: 1,
+      sortKey: '-start_date'
+    },
+    location: {
+      pathname: '/search',
+      search: ''
+    },
     match: {
       url: '/search'
     },
+    mapProjection: 'epsg4326',
+    onApplyGranuleFilters: jest.fn(),
+    onChangeQuery: jest.fn(),
+    onMetricsCollectionSortChange: jest.fn(),
+    onToggleAboutCwicModal: jest.fn(),
     onTogglePanels: jest.fn(),
     onSetActivePanel: jest.fn(),
     panels: {
@@ -54,8 +117,11 @@ function setup(overrideProps, location = '/search') {
 }
 
 describe('SearchPanels component', () => {
-  test('renders a Panels component for search page', () => {
+  test.only('renders a Panels component for search page', () => {
+    console.log('document.body', document.getElementById('root'))
+    ReactDOM.createPortal = jest.fn(dropdown => dropdown)
     const { enzymeWrapper } = setup()
+    console.log('enzymeWrapper', enzymeWrapper.debug())
 
     const panels = enzymeWrapper.find(Panels)
     expect(panels.props().show).toBeTruthy()

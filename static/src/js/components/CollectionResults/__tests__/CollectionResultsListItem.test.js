@@ -86,8 +86,14 @@ describe('CollectionResultsList component', () => {
     })
 
     test('sets the element size', () => {
-      const getBoundingClientRectMock = jest.fn(() => ({ height: 10 }))
+      const getBoundingClientRectMock = jest.fn(() => {
+        console.log('firing')
+        return { height: 10 }
+      })
+
       const { enzymeWrapper, props } = setup(mount)
+
+      console.log('enzymeWrapper.find(CollectionResultsItem)', enzymeWrapper.find('CollectionResultsItem').getElement().ref.current)
 
       enzymeWrapper.find('CollectionResultsItem').getElement().ref.current.getBoundingClientRect = getBoundingClientRectMock
 
